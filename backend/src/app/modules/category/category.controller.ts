@@ -7,12 +7,13 @@ import { StatusCodes } from 'http-status-codes';
 import { IJwtPayload } from '../auth/auth.interface';
 
 const createCategory = catchAsync(async (req: Request, res: Response) => {
-
   const result = await CategoryService.createCategory(
     req.body,
     req.file as IImageFile,
-    req.user as IJwtPayload
+    req.user as IJwtPayload,
   );
+
+  // console.log('cc cate', req.body);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
@@ -38,7 +39,7 @@ const deleteCategory = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await CategoryService.deleteCategoryIntoDB(
     id,
-    req.user as IJwtPayload
+    req.user as IJwtPayload,
   );
 
   sendResponse(res, {
@@ -52,5 +53,5 @@ const deleteCategory = catchAsync(async (req, res) => {
 export const CategoryController = {
   createCategory,
   getAllCategory,
-  deleteCategory
-}
+  deleteCategory,
+};
