@@ -33,6 +33,21 @@ export interface IUser extends Document {
   updatedAt: Date;
 }
 
+export interface IAuth {
+  email: string;
+  password: string;
+  userInfo: IUserInfo;
+}
+
+export interface IJwtPayload {
+  userId: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  role: UserRole;
+  isActive: boolean;
+}
+
 export interface UserModel extends Model<IUser> {
   //instance methods for checking if passwords are matched
   isPasswordMatched(
