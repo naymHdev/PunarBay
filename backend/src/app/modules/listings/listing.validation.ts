@@ -11,7 +11,6 @@ const listingValidationSchema = z.object({
       .min(10, 'Description must be at least 10 characters long'),
     price: z.number().min(0, 'Price must be a positive number'),
     condition: z.enum(['new', 'used', 'refurbished']),
-    images: z.array(z.string().url()).min(1, 'At least one image is required'),
     userID: z.string({ required_error: 'Invalid User ID' }),
     status: z.enum(['available', 'sold']).default('available'),
   }),
@@ -30,10 +29,6 @@ const listingUpdateValidationSchema = z.object({
       .optional(),
     price: z.number().min(0, 'Price must be a positive number').optional(),
     condition: z.enum(['new', 'used', 'refurbished']).optional(),
-    images: z
-      .array(z.string().url())
-      .min(1, 'At least one image is required')
-      .optional(),
     userID: z.string({ required_error: 'Invalid User ID' }).optional(),
     status: z.enum(['available', 'sold']).default('available').optional(),
   }),
