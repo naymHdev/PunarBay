@@ -16,6 +16,7 @@ const userSchema = new Schema<IUser, UserModel>(
     phoneNumber: {
       type: String,
       unique: true,
+      default: '',
     },
     email: {
       type: String,

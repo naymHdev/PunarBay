@@ -4,7 +4,8 @@ import AppError from '../../errors/appError';
 import { StatusCodes } from 'http-status-codes';
 import User from './auth.model';
 import config from '../../config';
-import { createToken } from './auth.utils';
+import { createToken, verifyToken } from './auth.utils';
+import { Secret } from 'jsonwebtoken';
 
 const loginUser = async (payload: IAuth) => {
   const session = await mongoose.startSession();
@@ -113,4 +114,44 @@ const registerUser = async (userData: IUser) => {
   }
 };
 
-export const AuthService = { registerUser, loginUser };
+const refreshToken = async (token: string) => {
+  let verifiedToken = null;
+  try {
+    verifiedToken = verifyToken(token, config.jwt_refresh_secret as Secret);
+  } catch (err: any) {
+    console.log(err);
+    throw new AppError(StatusCodes.FORBIDDEN, 'Invalid Refresh Token');
+  }
+
+  const { userId } = verifiedToken;
+
+  const isUserExist = await User.findById(userId);
+  if (!isUserExist) {
+    throw new AppError(StatusCodes.NOT_FOUND, 'User does not exist');
+  }
+
+  if (!isUserExist.isActive) {
+    throw new AppError(StatusCodes.BAD_REQUEST, 'User is not active');
+  }
+
+  const jwtPayload: IJwtPayload = {
+    userId: isUserExist._id as string,
+    name: isUserExist.name as string,
+    email: isUserExist.email as string,
+    phoneNumber: isUserExist.phoneNumber,
+    isActive: isUserExist.isActive,
+    role: isUserExist.role,
+  };
+
+  const newAccessToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as Secret,
+    config.jwt_access_expires_in as string,
+  );
+
+  return {
+    accessToken: newAccessToken,
+  };
+};
+
+export const AuthService = { registerUser, loginUser, refreshToken };

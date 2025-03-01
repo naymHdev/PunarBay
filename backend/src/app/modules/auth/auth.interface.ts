@@ -17,7 +17,6 @@ interface IUserInfo {
   os?: string; // Optional OS name (Windows, MacOS, etc.)
   userAgent?: string; // Optional user agent string
 }
-
 // User Schema Definition
 export interface IUser extends Document {
   name: string;
