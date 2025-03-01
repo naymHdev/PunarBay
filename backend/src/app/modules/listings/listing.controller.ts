@@ -3,6 +3,7 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { ListingServices } from './listing.service';
 import { IImageFiles } from '../../interface/IImageFile';
+import { IJwtPayload } from '../auth/auth.interface';
 
 const createListing = catchAsync(async (req, res) => {
   const result = await ListingServices.createListingIntoDB(
@@ -32,7 +33,40 @@ const getAllListings = catchAsync(async (req, res) => {
   });
 });
 
+const getSingleListing = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await ListingServices.getSingleListingFromDB(id);
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Listing Product retrieved successfully',
+    data: result,
+  });
+});
+
+const deleteListingProduct = catchAsync(async (req, res) => {
+  const {
+    user,
+    params: { id },
+  } = req;
+
+  const result = await ListingServices.deleteListingFromDB(
+    user as IJwtPayload,
+    id,
+  );
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Listing Product deleted successfully',
+    data: result,
+  });
+});
+
 export const ListingControllers = {
   createListing,
   getAllListings,
+  getSingleListing,
+  deleteListingProduct,
 };

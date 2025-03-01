@@ -4,6 +4,8 @@ import { IImageFiles } from '../../interface/IImageFile';
 import { ConditionType, IListing } from './listing.interface';
 import { Listing } from './listing.model';
 import QueryBuilder from '../../builder/QueryBuilder';
+import { IJwtPayload } from '../auth/auth.interface';
+import User from '../auth/auth.model';
 
 const createListingIntoDB = async (
   productData: Partial<IListing>,
@@ -82,7 +84,41 @@ const getALlListingsFromDB = async (query: Record<string, unknown>) => {
   };
 };
 
+const getSingleListingFromDB = async (id: string) => {
+  const product = await Listing.findById(id);
+
+  if (!product) {
+    throw new AppError(StatusCodes.NOT_FOUND, 'Listing Product not found');
+  }
+
+  const productObj = product.toObject();
+
+  return productObj;
+};
+
+const deleteListingFromDB = async (authUser: IJwtPayload, id: string) => {
+  const user = await User.findById(authUser.userId);
+
+  // Find the product with matching user
+  const product = await Listing.findOne({
+    _id: id,
+  });
+
+  if (!user?.isActive) {
+    throw new AppError(StatusCodes.BAD_REQUEST, 'User is not active');
+  }
+
+  if (!product) {
+    throw new AppError(StatusCodes.NOT_FOUND, 'Product Not Found');
+  }
+
+  const result = await Listing.findByIdAndDelete(id);
+  return result;
+};
+
 export const ListingServices = {
   createListingIntoDB,
   getALlListingsFromDB,
+  getSingleListingFromDB,
+  deleteListingFromDB,
 };

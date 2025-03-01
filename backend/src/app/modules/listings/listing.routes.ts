@@ -10,6 +10,7 @@ import { parseBody } from '../../middleware/bodyParser';
 const router = Router();
 
 router.get('/', ListingControllers.getAllListings);
+router.get('/:id', ListingControllers.getSingleListing);
 
 router.post(
   '/',
@@ -18,6 +19,12 @@ router.post(
   parseBody,
   validateRequest(ListingValidations.listingValidationSchema),
   ListingControllers.createListing,
+);
+
+router.delete(
+  '/:id',
+  auth(UserRole.USER),
+  ListingControllers.deleteListingProduct,
 );
 
 export const ListingRoutes = router;
