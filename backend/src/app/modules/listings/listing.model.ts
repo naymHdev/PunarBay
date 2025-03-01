@@ -15,6 +15,11 @@ const ListingSchema = new Schema<IListing>(
       type: [String],
       required: [true, 'Product images are required'],
     },
+    categories: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
+      required: [true, 'Category is required'],
+    },
     userID: {
       type: Schema.Types.ObjectId,
       ref: 'User',

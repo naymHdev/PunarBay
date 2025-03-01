@@ -13,6 +13,11 @@ const listingValidationSchema = z.object({
     condition: z.enum(['new', 'used', 'refurbished']),
     userID: z.string({ required_error: 'Invalid User ID' }),
     status: z.enum(['available', 'sold']).default('available'),
+    categories: z
+      .string({
+        required_error: 'Category ID is required',
+      })
+      .min(1, 'Category ID cannot be empty'),
   }),
 });
 
