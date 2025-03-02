@@ -1,9 +1,9 @@
 const HomePage = () => {
   return (
     <>
-      <div className="flex items-center justify-center flex-col">
-        <h1 className="text-3xl font-bold">This is Nunito using Outfit</h1>
-        <p className=" text-lg font-2nd">This is using Nunito Sans</p>
+      <div className="flex items-center h-screen justify-center flex-col">
+        <h1 className="text-3xl font-bold">PunarBay</h1>
+        <p className=" text-lg font-2nd">Buy and Sell Your Products!</p>
       </div>
     </>
   );
