@@ -61,7 +61,7 @@ const Navbar = () => {
             <div className="flex justify-center sm:justify-end gap-5">
               <div className="flex items-center gap-2">
                 <CircleUserRound />
-                <Link href="/login" className="text-sm">
+                <Link href="/register" className="text-sm">
                   Login/Register
                 </Link>
               </div>
