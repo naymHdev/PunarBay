@@ -50,7 +50,7 @@ export default function Navbar() {
             <Link href="/cart">
               <ShoppingCart className="w-6 h-6 text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600" />
             </Link>
-            <Link href="/profile">
+            <Link href="/user/dashboard">
               <User className="w-6 h-6 text-gray-700 dark:text-gray-300 cursor-pointer hover:text-blue-600" />
             </Link>
 
