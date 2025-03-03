@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { TLIsting } from "@/types/listings";
 import { currencyFormatter } from "@/utils/currencyFormatter";
 import clsx from "clsx";
+import { Plus } from "lucide-react";
 import Image from "next/image";
 
 type TListingsProps = {
@@ -11,11 +12,23 @@ type TListingsProps = {
 };
 
 const ManageListings = ({ allListings }: TListingsProps) => {
-  console.log("allListings", allListings);
+  //   console.log("allListings", allListings);
 
   return (
     <>
-      <div className=" space-y-8">
+      <div className=" mb-6 border-neutral-400">
+        <div className="flex items-center justify-between">
+          <h2 className=" text-2xl font-bold">My Products</h2>
+          <Button
+            className={clsx(
+              "bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg"
+            )}
+          >
+            Cretae Post <Plus />
+          </Button>
+        </div>
+      </div>
+      <div className=" space-y-8 h-screen overflow-auto no-scrollbar">
         {allListings &&
           allListings.map(
             ({

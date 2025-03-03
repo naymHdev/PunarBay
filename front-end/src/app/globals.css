@@ -114,3 +114,12 @@
     font-family: var(--font-outfit), sans-serif;
   }
 }
+
+/* Hidden Scrollbar */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
