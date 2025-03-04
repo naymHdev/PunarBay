@@ -1,0 +1,169 @@
+"use client";
+
+import PBImageUploader from "@/components/ui/core/PBImageUploader";
+import ImagePreviewer from "@/components/ui/core/PBImageUploader/ImagePreviewer";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+
+const PostAdForm = () => {
+  const [imageFiles, setImageFiles] = useState<File[] | []>([]);
+  const [imagePreview, setImagePreview] = useState<string[] | []>([]);
+
+  const form = useForm({
+    defaultValues: {
+      title: "",
+      description: "",
+      price: "",
+      categories: "",
+      condition: "",
+    },
+  });
+
+  const {
+    formState: { isSubmitting },
+  } = form;
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    console.log("data", data);
+  };
+
+  return (
+    <>
+      <div className=" mt-6">
+        <h3 className=" text-2xl font-medium">Tell Us About Your Products</h3>
+      </div>
+
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="mt-5 border-2 border-gray-300 rounded-xl flex-grow max-w-2xl p-5">
+            <div className="grid grid-cols-1 gap-4">
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Product Name</FormLabel>
+                    <FormControl>
+                      <Input {...field} value={field.value || ""} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="condition"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Condition</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Product condition" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className=" bg-slate-100">
+                        <SelectItem value="new">New</SelectItem>
+                        <SelectItem value="used">Used</SelectItem>
+                        <SelectItem value="refurbished">Refurbished</SelectItem>
+                      </SelectContent>
+                    </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="price"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Price</FormLabel>
+                    <FormControl>
+                      <Input {...field} value={field.value || ""} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="my-5">
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Description</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          className="h-36 resize-none"
+                          {...field}
+                          value={field.value || ""}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div>
+                <div className="flex justify-between items-center border-t border-b py-3 my-5">
+                  <p className="text-primary text-xl">Images</p>
+                </div>
+                <div className="flex gap-4 ">
+                  <PBImageUploader
+                    setImageFiles={setImageFiles}
+                    setImagePreview={setImagePreview}
+                    label="Upload Image"
+                    className="w-fit mt-0"
+                  />
+                  <ImagePreviewer
+                    className="flex flex-wrap gap-4"
+                    setImageFiles={setImageFiles}
+                    imagePreview={imagePreview}
+                    setImagePreview={setImagePreview}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              className="mt-5 w-full bg-[#1A78BA] text-white hover:bg-[#1A78BA] hover:cursor-pointer"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Adding Product....." : "Add Product"}
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </>
+  );
+};
+
+export default PostAdForm;

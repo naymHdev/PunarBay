@@ -6,6 +6,7 @@ import { currencyFormatter } from "@/utils/currencyFormatter";
 import clsx from "clsx";
 import { Plus } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 type TListingsProps = {
   allListings: TLIsting[];
@@ -19,13 +20,15 @@ const ManageListings = ({ allListings }: TListingsProps) => {
       <div className=" mb-6 border-neutral-400">
         <div className="flex items-center justify-between">
           <h2 className=" text-2xl font-bold">My Products</h2>
-          <Button
-            className={clsx(
-              "bg-[#1575B9] hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg"
-            )}
-          >
-            Cretae Post <Plus />
-          </Button>
+          <Link href="/user/post-ad">
+            <Button
+              className={clsx(
+                "bg-[#1575B9] hover:bg-blue-600 hover:cursor-pointer text-white font-medium px-6 py-2 rounded-lg"
+              )}
+            >
+              Cretae Post <Plus />
+            </Button>
+          </Link>
         </div>
       </div>
       <div className=" space-y-8 h-screen overflow-auto no-scrollbar">
