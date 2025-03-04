@@ -19,14 +19,21 @@ import {
 } from "@/components/ui/select";
 
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { TCategory } from "@/types/listings";
+import { getAllCategories } from "@/services/category";
+
+export type TPostAddFormProps = {
+  category: TCategory[];
+};
 
 const PostAdForm = () => {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
+  const [categories, setCategories] = useState<TCategory[] | []>([]);
 
   const form = useForm({
     defaultValues: {
@@ -41,6 +48,16 @@ const PostAdForm = () => {
   const {
     formState: { isSubmitting },
   } = form;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const [categoriesData] = await Promise.all([getAllCategories()]);
+
+      setCategories(categoriesData?.data);
+    };
+
+    fetchData();
+  }, []);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log("data", data);
@@ -65,6 +82,35 @@ const PostAdForm = () => {
                     <FormControl>
                       <Input {...field} value={field.value || ""} />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="categories"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Product Category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className=" bg-slate-100">
+                        {categories.map((category) => (
+                          <SelectItem key={category?._id} value={category?._id}>
+                            {category?.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
                     <FormMessage />
                   </FormItem>
                 )}
