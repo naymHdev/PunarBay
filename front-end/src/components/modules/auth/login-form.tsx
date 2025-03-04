@@ -39,7 +39,7 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       const res = await loginUser(data);
-      console.log("login__res", res);
+      // console.log("login__res", res);
       if (res?.success) {
         toast.error(res?.message);
         if (redirect) {
@@ -106,8 +106,11 @@ const LoginForm = () => {
                     )}
                   />
                 </div>
-                <Button type="submit" className="w-full bg-blue-500 text-white">
-                  Login
+                <Button
+                  type="submit"
+                  className="w-full bg-blue-500 hover:bg-blue-700 text-white"
+                >
+                  {isSubmitting ? "Loging...." : "Login"}
                 </Button>
                 <div className=" flex items-center">
                   <div className=" border border-neutral-500 w-[90px] mx-auto" />

@@ -1,3 +1,5 @@
+"use client";
+
 import { CircleUserRound, Search } from "lucide-react";
 import PBContainer from "../ui/PBContainer";
 import Link from "next/link";
@@ -11,8 +13,20 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
+import { useUser } from "@/contexts/UserContext";
 
 const Navbar = () => {
+  const { user } = useUser();
+  // console.log("user", user);
+
+  /* const handleLogOut = () => {
+    logout();
+    setIsLoading(true);
+    if (protectedRoutes.some((route) => pathname.match(route))) {
+      router.push("/");
+    }
+  }; */
+
   return (
     <>
       <div className="shadow">
@@ -21,7 +35,7 @@ const Navbar = () => {
             {/* Logo */}
             <div className="flex justify-center sm:justify-start">
               <div className="flex items-center text-4xl">
-                <h2 className="font-bold text-blue-600">Punar</h2>Bay
+                <h2 className="font-bold text-[#1575B9]">Punar</h2>Bay
               </div>
             </div>
 
@@ -42,14 +56,14 @@ const Navbar = () => {
                 </DropdownMenu>
               </div>
 
-              <div className="flex w-full items-center border border-blue-600 rounded">
+              <div className="flex w-full items-center border border-[#1575B9] rounded">
                 <Input
                   className="px-3 border-none"
                   type="search"
                   placeholder="Search in All Bangladesh"
                 />
                 <Button
-                  className="bg-blue-600 border-none rounded-none hover:bg-blue-700 text-white"
+                  className="bg-[#1575B9] border-none rounded-none hover:bg-[#1575B9] text-white"
                   type="submit"
                 >
                   <Search />
@@ -58,13 +72,29 @@ const Navbar = () => {
             </div>
 
             {/* User and Post Ad Buttons */}
-            <div className="flex justify-center sm:justify-end gap-5">
-              <div className="flex items-center gap-2">
-                <CircleUserRound />
-                <Link href="/register" className="text-sm">
-                  Login/Register
-                </Link>
-              </div>
+            <div className="flex items-center justify-center sm:justify-end gap-5">
+              {user?.isActive && user.email ? (
+                <>
+                  <Link href="/user/dashboard">
+                    <div className=" flex items-center gap-1">
+                      <CircleUserRound />
+                      <p className="text-sm font-medium text-foreground">
+                        {user.name.length > 10
+                          ? `${user.name.slice(0, 10)}...`
+                          : user.name}
+                      </p>
+                    </div>
+                  </Link>
+                </>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <CircleUserRound />
+                  <Link href="/login" className="text-sm">
+                    Login/Register
+                  </Link>
+                </div>
+              )}
+
               <PBButton>Post Free Ad</PBButton>
             </div>
           </div>
