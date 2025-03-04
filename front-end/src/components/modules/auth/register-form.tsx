@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import authImage from "../../../assets/auth.svg";
 import Image from "next/image";
@@ -20,6 +19,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { toast } from "sonner";
+import { register } from "@/services/auth";
 
 const RegisterForm = () => {
   const form = useForm({
@@ -31,19 +32,17 @@ const RegisterForm = () => {
   } = form;
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("res--------->", data);
-
-    // const toastId = toast.loading("Registering....");
-    // try {
-    //   const res = await registerUser(data);
-    //   if (res?.success) {
-    //     toast.error(res?.message, { id: toastId });
-    //   } else {
-    //     toast.error(res?.message, { id: toastId });
-    //   }
-    // } catch (error: any) {
-    //   console.log("register form error", error);
-    // }
+    try {
+      const res = await register(data);
+      // console.log("res--------->", res);
+      if (res?.success) {
+        toast.error(res?.message);
+      } else {
+        toast.error(res?.message);
+      }
+    } catch (error: any) {
+      console.log("register form error", error);
+    }
   };
 
   return (

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito_Sans, Outfit } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 // Import Outfit (Primary Font)
 const outfit = Outfit({
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${outfit.variable} ${nunitoSans.variable} antialiased`}>
         {children}
+        <Toaster position="top-right" />
       </body>
     </html>
   );
