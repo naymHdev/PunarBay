@@ -1,90 +1,48 @@
 "use client";
 
-import { ChevronsUpDown, LogOut } from "lucide-react";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { LogOut } from "lucide-react";
+import { DropdownMenu } from "@/components/ui/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/ui/sidebar";
 import { usePathname, useRouter } from "next/navigation";
-// import { useUser } from "@/contexts/UserContext";
-// import { logout } from "@/services/authService";
-// import { protectedRoutes } from "@/constants";
+import { useUser } from "@/contexts/UserContext";
+import { logout } from "@/services/auth";
+import { protectedRoutes } from "@/constants";
+
 export function NavUser() {
-  const { isMobile } = useSidebar();
-  // const { user, setIsLoading } = useUser();
+  const { user, setIsLoading } = useUser();
 
-  // const router = useRouter();
-  // const pathname = usePathname();
+  const router = useRouter();
+  const pathname = usePathname();
 
-  // const handleLogout = () => {
-  //   logout();
-  //   setIsLoading(true);
+  const handleLogout = () => {
+    logout();
+    setIsLoading(true);
 
-  //   if (protectedRoutes.some((route) => pathname.match(route))) {
-  //     router.push("/");
-  //   }
-  // };
+    if (protectedRoutes.some((route) => pathname.match(route))) {
+      router.push("/");
+    }
+  };
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage alt="Naym" />
-                <AvatarFallback className="rounded-lg">User</AvatarFallback>
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">Naym Hossen</span>
-                <span className="truncate text-xs">naymhossen09@gmail.com</span>
-              </div>
-              <ChevronsUpDown className="ml-auto size-4" />
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
-            align="end"
-            sideOffset={4}
+          <SidebarMenuButton
+            size="lg"
+            className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
           >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage alt="Naym" />
-                  <AvatarFallback className="rounded-lg">User</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Naym</span>
-                  <span className="truncate text-xs">
-                    naymhossen09@gmail.com
-                  </span>
-                </div>
-              </div>
-            </DropdownMenuLabel>
-
-            <DropdownMenuItem
-              className=" cursor-pointer text-secondary bg-primary"
-              // onClick={() => handleLogout()}
+            <div
+              className="w-full cursor-pointer  text-[#1575B9] flex gap-2 items-center font-medium text-lg"
+              onClick={() => handleLogout()}
             >
               <LogOut />
               Log out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
+            </div>
+          </SidebarMenuButton>
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>

@@ -54,7 +54,7 @@ export function NavMain({
                 <SidebarMenuButton asChild tooltip={item.title}>
                   <Link
                     className={`text-md font-medium ${
-                      isActive ? "text-blue-500" : ""
+                      isActive ? "text-[#1575B9]" : ""
                     }`}
                     href={item.url}
                   >

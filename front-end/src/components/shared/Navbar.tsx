@@ -19,14 +19,6 @@ const Navbar = () => {
   const { user } = useUser();
   // console.log("user", user);
 
-  /* const handleLogOut = () => {
-    logout();
-    setIsLoading(true);
-    if (protectedRoutes.some((route) => pathname.match(route))) {
-      router.push("/");
-    }
-  }; */
-
   return (
     <>
       <div className="shadow">

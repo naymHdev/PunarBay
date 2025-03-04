@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { FolderKanban, UserRoundCog } from "lucide-react";
+import { FolderKanban, UserRoundCog, HomeIcon } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -18,6 +18,11 @@ import { NavUser } from "./nav-user";
 // This is sample data.
 const data = {
   navMain: [
+    {
+      title: "Home",
+      url: "/",
+      icon: HomeIcon,
+    },
     {
       title: "My Listings",
       url: "/user/dashboard",

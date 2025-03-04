@@ -21,7 +21,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
           <h2 className=" text-2xl font-bold">My Products</h2>
           <Button
             className={clsx(
-              "bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg"
+              "bg-[#1575B9] hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg"
             )}
           >
             Cretae Post <Plus />
@@ -65,7 +65,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
                           className={clsx("px-1", {
                             "text-green-500": condition === "new",
                             "text-yellow-500": condition === "used",
-                            "text-blue-500": condition === "refurbished",
+                            "text-[#1575B9]": condition === "refurbished",
                           })}
                         >
                           {condition.charAt(0).toUpperCase() +
@@ -99,7 +99,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
 
                     <Button
                       className={clsx(
-                        "bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg"
+                        "bg-[#1575B9] hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg"
                       )}
                     >
                       Update
