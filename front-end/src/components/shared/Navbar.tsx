@@ -21,13 +21,18 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="shadow">
+      <div className="shadow-sm bg-white">
         <PBContainer maxWidth="7xl">
           <div className="py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center justify-center gap-4">
             {/* Logo */}
-            <div className="flex justify-center sm:justify-start">
+            <div className="flex items-center justify-center sm:justify-start">
               <div className="flex items-center text-4xl">
                 <h2 className="font-bold text-[#1575B9]">Punar</h2>Bay
+              </div>
+              <div>
+                <Link className=" ml-8 text-lg font-medium" href="/listings">
+                  All Products
+                </Link>
               </div>
             </div>
 

@@ -83,7 +83,7 @@ const PostAdForm = () => {
     }
     try {
       const res = await addListig(formData);
-      console.log("res", res);
+      // console.log("res", res);
 
       if (res.success) {
         toast.success(res.message);
