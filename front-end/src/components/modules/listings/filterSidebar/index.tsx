@@ -42,6 +42,8 @@ export default function FilterSidebar() {
   const handleSearchQuery = (query: string, value: string | number) => {
     const params = new URLSearchParams(searchParams.toString());
 
+    console.log("params", params);
+
     params.set(query, value.toString());
 
     router.push(`${pathname}?${params.toString()}`, {
@@ -82,11 +84,43 @@ export default function FilterSidebar() {
             setPrice(value);
             handleSearchQuery("price", value[0]);
           }}
-          className={`w-full bg-[#1575B9] rounded-full ${styles.customSlider}`}
+          className={`w-full bg-[#1575B9] h-2 rounded-full ${styles.customSlider}`}
         />
 
         <p className="text-sm mt-2">Selected Price: Tk {price[0]}</p>
       </div>
+
+      {/* Product conditions */}
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold mb-4">Condition</h2>
+        <RadioGroup defaultValue="new">
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem
+              onClick={() => handleSearchQuery("condition", "new")}
+              value="new"
+              id="new"
+            />
+            <Label className="text-gray-500 font-light">New</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem
+              onClick={() => handleSearchQuery("condition", "used")}
+              value="used"
+              id="used"
+            />
+            <Label className="text-gray-500 font-light">Used</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem
+              onClick={() => handleSearchQuery("condition", "refurbished")}
+              value="refurbished"
+              id="refurbished"
+            />
+            <Label className="text-gray-500 font-light">Refurbished</Label>
+          </div>
+        </RadioGroup>
+      </div>
+
       {/* Product Types */}
       <div className="mb-6">
         <h2 className="text-lg font-semibold mb-4">Product Category</h2>
@@ -95,7 +129,7 @@ export default function FilterSidebar() {
             {categories?.map((category: { _id: string; name: string }) => (
               <div key={category._id} className="flex items-center space-x-2">
                 <RadioGroupItem
-                  onClick={() => handleSearchQuery("category", category._id)}
+                  onClick={() => handleSearchQuery("categories", category._id)}
                   value={category._id}
                   id={category._id}
                 />

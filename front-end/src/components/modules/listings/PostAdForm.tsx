@@ -87,7 +87,7 @@ const PostAdForm = () => {
 
       if (res.success) {
         toast.success(res.message);
-        router.push("/user/dashboard");
+        // router.push("/user/dashboard");
       } else {
         toast.error(res.message);
       }

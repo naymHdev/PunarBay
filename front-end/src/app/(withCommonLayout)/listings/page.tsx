@@ -4,8 +4,19 @@ import ProductCard from "@/components/ui/ProductCard";
 import { getAllListings } from "@/services/listings";
 import { TLIsting } from "@/types/listings";
 
-const ListingsPage = async () => {
-  const { data: allListings } = await getAllListings();
+type TSearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+const ListingsPage = async ({
+  searchParams,
+}: {
+  searchParams: TSearchParams;
+}) => {
+  const query = await searchParams;
+  const { data: allListings } = await getAllListings(
+    undefined,
+    undefined,
+    query
+  );
 
   return (
     <>
@@ -17,9 +28,12 @@ const ListingsPage = async () => {
             </div>
             <div className="">
               {allListings &&
-                allListings.map((product: TLIsting) => (
-                  <ProductCard key={product._id} product={product} />
-                ))}
+                allListings
+                  .slice()
+                  .reverse()
+                  .map((product: TLIsting) => (
+                    <ProductCard key={product._id} product={product} />
+                  ))}
             </div>
           </div>
         </PBContainer>
