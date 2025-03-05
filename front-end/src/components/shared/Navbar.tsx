@@ -14,10 +14,24 @@ import {
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
 import { useUser } from "@/contexts/UserContext";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const Navbar = () => {
   const { user } = useUser();
   // console.log("user", user);
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const handleSearchQuery = (query: string, value: string | number) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set(query, value.toString());
+    router.push(`${pathname}?${params.toString()}`, {
+      scroll: false,
+    });
+  };
 
   return (
     <>
@@ -55,16 +69,21 @@ const Navbar = () => {
 
               <div className="flex w-full items-center border border-[#1575B9] rounded">
                 <Input
+                  onChange={(e) =>
+                    handleSearchQuery("searchTerm", e.target.value)
+                  }
                   className="px-3 border-none"
                   type="search"
                   placeholder="Search in All Bangladesh"
                 />
-                <Button
-                  className="bg-[#1575B9] border-none rounded-none hover:bg-[#1575B9] text-white"
-                  type="submit"
-                >
-                  <Search />
-                </Button>
+                <Link href="/listings">
+                  <Button
+                    className="bg-[#1575B9] hover:cursor-pointer border-none rounded-none hover:bg-[#1575B9] text-white"
+                    type="submit"
+                  >
+                    <Search />
+                  </Button>
+                </Link>
               </div>
             </div>
 

@@ -11,9 +11,7 @@ import styles from "./filterSidebar.module.css";
 
 export default function FilterSidebar() {
   const [price, setPrice] = useState([0]);
-
   const [isLoading, setIsLoading] = useState(false);
-
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -42,7 +40,7 @@ export default function FilterSidebar() {
   const handleSearchQuery = (query: string, value: string | number) => {
     const params = new URLSearchParams(searchParams.toString());
 
-    console.log("params", params);
+    // console.log("params", params);
 
     params.set(query, value.toString());
 

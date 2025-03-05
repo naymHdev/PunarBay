@@ -28,7 +28,7 @@ export const getAllListings = async (
   const params = new URLSearchParams();
 
   if (query?.price) {
-    params.append("minPrice", "0");
+    params.append("maxPrice", "0");
     params.append("maxPrice", query?.price.toString());
   }
 
@@ -40,6 +40,10 @@ export const getAllListings = async (
     params.append("condition", query?.condition.toString());
   }
 
+  if (query?.searchTerm) {
+    params.append("searchTerm", query?.searchTerm.toString());
+  }
+
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/listings?limit=${limit}&page=${page}&${params}`,
@@ -49,8 +53,6 @@ export const getAllListings = async (
         },
       }
     );
-
-    console.log("res", res);
 
     return res.json();
   } catch (error: any) {
