@@ -9,7 +9,7 @@ interface IButtonProps {
 const PBButton = ({ children, className = "", ...props }: IButtonProps) => {
   return (
     <Button
-      className={`${className} bg-[#1575B9] hover:bg-[#1575B9] text-white`}
+      className={`${className} bg-[#1575B9] hover:bg-[#1575B9] text-white hover:cursor-pointer`}
       {...props}
     >
       {children}

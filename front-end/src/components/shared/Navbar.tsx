@@ -1,6 +1,6 @@
 "use client";
 
-import { CircleUserRound, Search } from "lucide-react";
+import { CircleUserRound, Plus, Search } from "lucide-react";
 import PBContainer from "../ui/PBContainer";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -87,7 +87,11 @@ const Navbar = () => {
                 </div>
               )}
 
-              <PBButton>Post Free Ad</PBButton>
+              <Link href="/user/post-ad">
+                <PBButton>
+                  Post Free Ad <Plus />
+                </PBButton>
+              </Link>
             </div>
           </div>
         </PBContainer>

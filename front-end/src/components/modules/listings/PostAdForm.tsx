@@ -17,7 +17,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -25,6 +24,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { TCategory } from "@/types/listings";
 import { getAllCategories } from "@/services/category";
+import { addListig } from "@/services/listings";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/contexts/UserContext";
 
 export type TPostAddFormProps = {
   category: TCategory[];
@@ -34,6 +37,10 @@ const PostAdForm = () => {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
   const [categories, setCategories] = useState<TCategory[] | []>([]);
+
+  const { user } = useUser();
+  console.log("userId__", user?.userId);
+  const router = useRouter();
 
   const form = useForm({
     defaultValues: {
@@ -60,7 +67,33 @@ const PostAdForm = () => {
   }, []);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("data", data);
+    const modifiedData = {
+      ...data,
+      price: parseFloat(data.price),
+      userID: user?.userId,
+    };
+
+    console.log("modifiedData__", modifiedData);
+
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(modifiedData));
+
+    for (const file of imageFiles) {
+      formData.append("images", file);
+    }
+    try {
+      const res = await addListig(formData);
+      console.log("res", res);
+
+      if (res.success) {
+        toast.success(res.message);
+        router.push("/user/dashboard");
+      } else {
+        toast.error(res.message);
+      }
+    } catch (err: any) {
+      console.error(err);
+    }
   };
 
   return (
