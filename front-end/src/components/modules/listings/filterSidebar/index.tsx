@@ -1,9 +1,115 @@
-import React from 'react'
+"use client";
+import { useEffect, useState } from "react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { getAllCategories } from "@/services/category";
+import { Slider } from "@/components/ui/slider";
+import styles from "./filterSidebar.module.css";
 
-const FilterSidebar = () => {
+export default function FilterSidebar() {
+  const [price, setPrice] = useState([0]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const [{ data: categoriesData }] = await Promise.all([
+          getAllCategories(),
+        ]);
+        setCategories(categoriesData);
+      } catch (error: any) {
+        console.error(error);
+        toast.error("Failed to fetch filters");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const handleSearchQuery = (query: string, value: string | number) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set(query, value.toString());
+
+    router.push(`${pathname}?${params.toString()}`, {
+      scroll: false,
+    });
+  };
+
   return (
-    <div>FilterSidebar</div>
-  )
-}
+    <div className="p-6 bg-white rounded-lg">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-xl font-semibold text-[#1575B9]">Filter</h2>
+        {searchParams.toString().length > 0 && (
+          <Button
+            onClick={() => {
+              router.push(`${pathname}`, {
+                scroll: false,
+              });
+            }}
+            size="sm"
+            className="text-white hover:cursor-pointer bg-[#1575B9] hover:bg-[#1575B9] ml-5"
+          >
+            Clear Filters
+          </Button>
+        )}
+      </div>
+      {/* Filter by Price */}
 
-export default FilterSidebar
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold mb-4">Price</h2>
+        <div className="flex items-center justify-between text-sm mb-2">
+          <span>TK 0</span>
+          <span>TK 100000</span>
+        </div>
+        <Slider
+          max={100000}
+          step={1}
+          onValueChange={(value) => {
+            setPrice(value);
+            handleSearchQuery("price", value[0]);
+          }}
+          className={`w-full bg-[#1575B9] rounded-full ${styles.customSlider}`}
+        />
+
+        <p className="text-sm mt-2">Selected Price: Tk {price[0]}</p>
+      </div>
+      {/* Product Types */}
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold mb-4">Product Category</h2>
+        {!isLoading && (
+          <RadioGroup className="space-y-2">
+            {categories?.map((category: { _id: string; name: string }) => (
+              <div key={category._id} className="flex items-center space-x-2">
+                <RadioGroupItem
+                  onClick={() => handleSearchQuery("category", category._id)}
+                  value={category._id}
+                  id={category._id}
+                />
+                <Label
+                  htmlFor={category._id}
+                  className="text-gray-500 font-light"
+                >
+                  {category.name}
+                </Label>
+              </div>
+            ))}
+          </RadioGroup>
+        )}
+      </div>
+    </div>
+  );
+}

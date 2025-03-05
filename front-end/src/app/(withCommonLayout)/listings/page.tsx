@@ -17,8 +17,8 @@ const ListingsPage = async () => {
             </div>
             <div className="">
               {allListings &&
-                allListings.map((product: TLIsting, idx: number) => (
-                  <ProductCard product={product} />
+                allListings.map((product: TLIsting) => (
+                  <ProductCard key={product._id} product={product} />
                 ))}
             </div>
           </div>

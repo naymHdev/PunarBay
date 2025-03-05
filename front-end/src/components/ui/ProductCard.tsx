@@ -14,7 +14,7 @@ const ProductCard = ({ product }: { product: TLIsting }) => {
   return (
     <>
       <section>
-        <Card className="relative max-w-3xl mt-6 bg-white border-none w-full mx-auto shadow-md rounded-lg overflow-hidden">
+        <Card className="relative max-w-3xl mb-6 bg-white border-none w-full mx-auto shadow-md rounded-lg overflow-hidden">
           <CardContent className="flex flex-col md:flex-row gap-5">
             {/* Image Section */}
             <div className="w-full md:w-1/3 flex items-center justify-center">
@@ -28,19 +28,21 @@ const ProductCard = ({ product }: { product: TLIsting }) => {
             </div>
 
             {/* Content Section */}
-            <div className="w-full md:w-2/3 space-y-4">
-              <h2 className="text-xl font-semibold text-[#1575B9]">
-                {product.title}
-              </h2>
-              <p className="text-gray-600 line-clamp-3">
-                {product.description}
-              </p>
-              <p className="text-lg font-bold text-primary">
-                {currencyFormatter(product.price)}
-              </p>
+            <div className="w-full md:w-2/3 flex flex-col justify-between">
+              <div className="space-y-4">
+                <h2 className="text-xl font-semibold text-[#1575B9]">
+                  {product.title}
+                </h2>
+                <p className="text-gray-600 line-clamp-3">
+                  {product.description}
+                </p>
+                <p className="text-lg font-bold text-primary">
+                  {currencyFormatter(product.price)}
+                </p>
+              </div>
 
               {/* Status and Time Section */}
-              <div className="flex justify-between items-center text-center text-sm text-gray-600">
+              <div className="mt-4 md:mt-0 flex justify-between items-center text-center text-sm text-gray-600">
                 <div
                   className={clsx("font-medium", {
                     "text-[#1575B9]": product.status === "available",
