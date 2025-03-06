@@ -6,7 +6,7 @@ import { TUser } from "@/types/listings";
 
 const UserBox = ({ user }: { user: TUser }) => {
   return (
-    <div className="w-full rounded-lg bg-blue-100 p-4">
+    <div className="w-full rounded-lg bg-blue-100/70 p-4">
       {/* Avatar */}
       <div className="flex justify-center">
         <Avatar className="w-16 h-16">
