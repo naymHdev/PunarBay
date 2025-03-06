@@ -9,7 +9,7 @@ import { Clock4, Facebook, Linkedin, Twitter } from "lucide-react";
 import SimilarAds from "./SimilarAds";
 
 const ListingDetails = ({ product }: { product: TLIsting }) => {
-  const timeAgo = formatDistanceToNow(new Date(product.createdAt), {
+  const timeAgo = formatDistanceToNow(new Date(product?.createdAt), {
     addSuffix: true,
   });
 
@@ -18,15 +18,15 @@ const ListingDetails = ({ product }: { product: TLIsting }) => {
       <div className="mt-10 grid grid-cols-1 md:grid-cols-7 gap-7">
         <div className=" hidden md:block md:col-span-1 rounded-lg p-8"></div>
         <div className="bg-white col-span-1 md:col-span-4 rounded-lg p-8">
-          <PBCarosole images={product.images} />
+          <PBCarosole images={product?.images} />
           <div className=" mt-10">
             <div className=" flex justify-between">
-              <h2 className=" text-2xl font-medium">{product.title}</h2>
+              <h2 className=" text-2xl font-medium">{product?.title}</h2>
               <p className=" text-lg font-semibold text-[#1575B9]">
-                {currencyFormatter(product.price)}
+                {currencyFormatter(product?.price)}
               </p>
             </div>
-            <p className=" mt-5 font-2nd"> {product.description}</p>
+            <p className=" mt-5 font-2nd"> {product?.description}</p>
 
             <div className=" mt-10 border-neutral-300 border-t border-b py-4 flex items-center justify-between">
               <div className=" flex items-center gap-2">
@@ -60,7 +60,7 @@ const ListingDetails = ({ product }: { product: TLIsting }) => {
         </div>
 
         <div className="bg-white col-span-1 md:col-span-2  p-4 rounded-lg">
-          <UserBox user={product.userID} />
+          <UserBox user={product?.userID} />
         </div>
       </div>
 
@@ -68,7 +68,7 @@ const ListingDetails = ({ product }: { product: TLIsting }) => {
       <section className="mt-5 grid grid-cols-1 md:grid-cols-7 gap-7">
         <div className=" hidden md:block md:col-span-1 rounded-lg p-8"></div>
         <div className="bg-white col-span-1 md:col-span-4 rounded-lg p-8">
-          <SimilarAds category={product.categories.name} />
+          <SimilarAds category={product?.categories.name} />
         </div>
         <div className="col-span-1 md:col-span-2  p-4 rounded-lg"></div>
       </section>
