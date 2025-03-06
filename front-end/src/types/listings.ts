@@ -11,6 +11,14 @@ export type TCategory = {
   __v: number;
 };
 
+export type TUser = {
+  _id: string;
+  name: string;
+  email: string;
+  lastLogin: Date;
+  isActive: boolean;
+};
+
 export type TLIsting = {
   _id: string;
   title: string;
@@ -19,7 +27,7 @@ export type TLIsting = {
   condition: "new" | "used" | "refurbished";
   images: string[];
   categories: TCategory;
-  userID: string;
+  userID: TUser;
   status: "available" | "sold";
   createdAt: string;
   updatedAt: string;

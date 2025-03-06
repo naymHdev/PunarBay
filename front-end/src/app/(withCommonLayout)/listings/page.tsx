@@ -18,6 +18,10 @@ const ListingsPage = async ({
     query
   );
 
+  const availableProduct = allListings.filter(
+    (itm: TLIsting) => itm.status === "available"
+  );
+
   return (
     <>
       <div className=" mt-10">
@@ -27,8 +31,8 @@ const ListingsPage = async ({
               <FilterSidebar />
             </div>
             <div className="">
-              {allListings &&
-                allListings
+              {availableProduct &&
+                availableProduct
                   .slice()
                   .reverse()
                   .map((product: TLIsting) => (

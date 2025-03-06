@@ -4,7 +4,7 @@ import Image from "next/image";
 import { currencyFormatter } from "@/utils/currencyFormatter";
 import { formatDistanceToNow } from "date-fns";
 import { Clock4 } from "lucide-react";
-import clsx from "clsx";
+import Link from "next/link";
 
 const ProductCard = ({ product }: { product: TLIsting }) => {
   const timeAgo = formatDistanceToNow(new Date(product.createdAt), {
@@ -13,7 +13,7 @@ const ProductCard = ({ product }: { product: TLIsting }) => {
 
   return (
     <>
-      <section>
+      <Link href={`/listings/${product._id}`}>
         <Card className="relative max-w-3xl mb-6 bg-white border-none w-full mx-auto shadow-md rounded-lg overflow-hidden">
           <CardContent className="flex flex-col md:flex-row gap-5">
             {/* Image Section */}
@@ -42,16 +42,7 @@ const ProductCard = ({ product }: { product: TLIsting }) => {
               </div>
 
               {/* Status and Time Section */}
-              <div className="mt-4 md:mt-0 flex justify-between items-center text-center text-sm text-gray-600">
-                <div
-                  className={clsx("font-medium", {
-                    "text-[#1575B9]": product.status === "available",
-                    "text-red-500": product.status === "sold",
-                  })}
-                >
-                  {product.status.charAt(0).toUpperCase() +
-                    product.status.slice(1)}
-                </div>
+              <div className="mt-4 md:mt-0 flex justify-end items-center text-center text-sm text-gray-600">
                 <div className="flex items-center gap-1">
                   <Clock4 size={20} />
                   {timeAgo}
@@ -60,7 +51,7 @@ const ProductCard = ({ product }: { product: TLIsting }) => {
             </div>
           </CardContent>
         </Card>
-      </section>
+      </Link>
     </>
   );
 };
