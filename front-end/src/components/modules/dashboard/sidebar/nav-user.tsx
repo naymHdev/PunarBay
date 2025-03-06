@@ -36,7 +36,7 @@ export function NavUser() {
             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
           >
             <div
-              className="w-full cursor-pointer  text-[#1575B9] flex gap-2 items-center font-medium text-lg"
+              className="w-full cursor-pointer  text-red-500 flex gap-2 items-center font-medium text-lg"
               onClick={() => handleLogout()}
             >
               <LogOut />

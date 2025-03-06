@@ -15,6 +15,10 @@ type TListingsProps = {
 const ManageListings = ({ allListings }: TListingsProps) => {
   //   console.log("allListings", allListings);
 
+  const handleListingDelete = (id: string) => {
+    console.log(id);
+  };
+
   return (
     <>
       <div className=" mb-6 border-neutral-400">
@@ -31,7 +35,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
           </Link>
         </div>
       </div>
-      <div className=" space-y-8 h-screen overflow-auto no-scrollbar">
+      <div className="space-y-8">
         {allListings &&
           allListings.map(
             ({
@@ -46,7 +50,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
             }) => (
               <div
                 key={_id}
-                className="border border-neutral-300 p-4 rounded-2xl flex gap-8 justify-between"
+                className="bg-white  p-4 rounded-2xl flex gap-8 justify-between"
               >
                 <div>
                   <div className=" space-y-2">
@@ -93,6 +97,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
                   </div>
                   <div className="mt-6 flex gap-4">
                     <Button
+                      onClick={() => handleListingDelete(categories?._id)}
                       className={clsx(
                         "bg-red-500 hover:bg-red-600 text-white font-medium px-6 py-2 rounded-lg"
                       )}
@@ -100,13 +105,15 @@ const ManageListings = ({ allListings }: TListingsProps) => {
                       Remove
                     </Button>
 
-                    <Button
-                      className={clsx(
-                        "bg-[#1575B9] hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg"
-                      )}
-                    >
-                      Update
-                    </Button>
+                    <Link href="/user/update-listing">
+                      <Button
+                        className={clsx(
+                          "bg-[#1575B9] hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg"
+                        )}
+                      >
+                        Update
+                      </Button>
+                    </Link>
                   </div>
                 </div>
                 <div>

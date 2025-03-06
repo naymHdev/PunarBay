@@ -17,7 +17,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
               <SidebarTrigger className="-ml-1" />
             </div>
           </header>
-          <div className="p-4 pt-0 min-h-screen">{children}</div>
+          <div className="pt-0 min-h-screen">{children}</div>
         </SidebarInset>
       </SidebarProvider>
     </PBContainer>

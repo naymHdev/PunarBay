@@ -37,7 +37,7 @@ export function NavMain({
   const pathname = usePathname();
 
   return (
-    <SidebarGroup className="px-6">
+    <SidebarGroup className="">
       <SidebarGroupLabel>Account</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => {
@@ -53,7 +53,7 @@ export function NavMain({
               <SidebarMenuItem className="">
                 <SidebarMenuButton asChild tooltip={item.title}>
                   <Link
-                    className={`text-md font-medium ${
+                    className={`text-lg font-semibold ${
                       isActive ? "text-[#1575B9]" : ""
                     }`}
                     href={item.url}
