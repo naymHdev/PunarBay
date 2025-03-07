@@ -20,6 +20,35 @@ const userValidationSchema = z.object({
   }),
 });
 
+const userUpdateValidationSchema = z.object({
+  body: z.object({
+    name: z.string().min(1, 'Name is required').optional(),
+    phoneNo: z
+      .string()
+      .regex(/^\d{11}$/, 'Phone number must be exactly 11 digits long')
+      .optional(),
+    gender: z.enum(['Male', 'Female', 'Other']).default('Other').optional(),
+    dateOfBirth: z
+      .string()
+      .optional()
+      .refine((value) => !value || !isNaN(Date.parse(value)), {
+        message: 'Invalid date format. Must be a valid date.',
+      })
+      .optional(),
+    profileImage: z.string().optional(),
+    address: z
+      .object({
+        street: z.string().min(1, 'Street is required').optional(),
+        city: z.string().min(1, 'City is required').optional(),
+        state: z.string().min(1, 'State is required').optional(),
+        postalCode: z.string().min(1, 'Postal code is required').optional(),
+        country: z.string().min(1, 'Country is required').optional(),
+      })
+      .optional(),
+  }),
+});
+
 export const AuthValidation = {
   userValidationSchema,
+  userUpdateValidationSchema,
 };

@@ -29,6 +29,7 @@ export interface IUser extends Document {
   otpToken: string | null; // Explicitly set as nullable
   readonly createdAt: Date; // `readonly` to prevent manual modification
   updatedAt: Date;
+  profileImage?: string;
 }
 
 export interface IAuth {
