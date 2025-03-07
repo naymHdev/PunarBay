@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 import { jwtDecode } from "jwt-decode";
+import { revalidateTag } from "next/cache";
 
 export const register = async (userData: FieldValues) => {
   try {
@@ -16,6 +17,7 @@ export const register = async (userData: FieldValues) => {
         body: JSON.stringify(userData),
       }
     );
+    revalidateTag("USER");
     const result = await res.json();
 
     if (result.success) {
@@ -38,6 +40,7 @@ export const loginUser = async (userData: FieldValues) => {
       },
       body: JSON.stringify(userData),
     });
+    revalidateTag("USER");
     const result = await res.json();
 
     if (result.success) {

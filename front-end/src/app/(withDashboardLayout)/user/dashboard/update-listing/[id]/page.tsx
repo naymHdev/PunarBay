@@ -1,4 +1,4 @@
-import UpdateListingForm from "@/components/modules/listings/dashboard/UpdateListing/UpdateListingForm";
+import UpdateListingForm from "@/components/modules/dashboard/UpdateListing/UpdateListingForm";
 import PBContainer from "@/components/ui/PBContainer";
 import { getSingleListing } from "@/services/listings";
 

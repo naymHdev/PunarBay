@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { FolderKanban, UserRoundCog, HomeIcon } from "lucide-react";
+import { FolderKanban, HomeIcon, UserCog } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -24,15 +24,15 @@ const data = {
       icon: HomeIcon,
     },
     {
+      title: "My Account",
+      url: "/user/my-account",
+      icon: UserCog,
+    },
+    {
       title: "My Listings",
       url: "/user/dashboard",
       icon: FolderKanban,
       isActive: true,
-    },
-    {
-      title: "My Settings",
-      url: "/user/settings",
-      icon: UserRoundCog,
     },
   ],
 };
