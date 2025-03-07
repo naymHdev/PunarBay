@@ -124,7 +124,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
                       Remove
                     </Button>
 
-                    <Link href="/user/update-listing">
+                    <Link href={`/user/dashboard/update-listing/${_id}`}>
                       <Button
                         className={clsx(
                           "bg-[#1575B9] hover:cursor-pointer hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg"

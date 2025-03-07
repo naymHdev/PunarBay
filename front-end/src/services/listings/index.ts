@@ -60,7 +60,7 @@ export const getAllListings = async (
   }
 };
 
-// get single product
+// get single listing product
 export const getSingleListing = async (id: string) => {
   try {
     const res = await fetch(
@@ -86,15 +86,33 @@ export const deleteListing = async (id: string) => {
         method: "DELETE",
       }
     );
-
-    // if (!res.ok) {
-    //   throw new Error(`Failed to delete listing:`);
-    // }
-
     revalidateTag("LISTING");
 
     return await res.json();
   } catch (error: any) {
     return new Error(error.message);
+  }
+};
+
+// update listing product
+export const updateListingProduct = async (
+  productData: FormData,
+  id: string
+): Promise<any> => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/listings/${id}`,
+      {
+        method: "PUT",
+        body: productData,
+        headers: {
+          Authorization: (await cookies()).get("accessToken")!.value,
+        },
+      }
+    );
+    revalidateTag("LISTING");
+    return res.json();
+  } catch (error: any) {
+    return Error(error);
   }
 };
