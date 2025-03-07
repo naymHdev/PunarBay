@@ -7,7 +7,7 @@ import { IImageFile } from '../../interface/IImageFile';
 const myProfile = async (authUser: IJwtPayload) => {
   //   console.log('authUser', authUser);
 
-  const isUserExists = await User.findById(authUser._id);
+  const isUserExists = await User.findById(authUser._id).populate('_id');
   if (!isUserExists) {
     throw new AppError(StatusCodes.NOT_FOUND, 'User not found!');
   }
@@ -25,11 +25,13 @@ const updateProfile = async (
   file: IImageFile,
   authUser: IJwtPayload,
 ) => {
+  // Fetch the current user
   const isUserExists = await User.findById(authUser._id);
 
   if (!isUserExists) {
     throw new AppError(StatusCodes.NOT_FOUND, 'User not found!');
   }
+
   if (!isUserExists.isActive) {
     throw new AppError(StatusCodes.BAD_REQUEST, 'User is not active!');
   }
@@ -38,9 +40,19 @@ const updateProfile = async (
     payload.profileImage = file.path;
   }
 
-  const result = await User.findOneAndUpdate({ user: authUser._id }, payload, {
-    new: true,
-  });
+  // Merge existing address with new address data
+  if (payload.address) {
+    payload.address = {
+      ...isUserExists.address,
+      ...payload.address,
+    };
+  }
+
+  const result = await User.findOneAndUpdate(
+    { _id: authUser._id },
+    { $set: payload },
+    { new: true },
+  );
 
   return result;
 };

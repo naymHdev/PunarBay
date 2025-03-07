@@ -2,9 +2,17 @@
 import mongoose, { Schema } from 'mongoose';
 import AppError from '../../errors/appError';
 import { StatusCodes } from 'http-status-codes';
-import { IUser, UserModel, UserRole } from './auth.interface';
+import { IAddress, IUser, UserModel, UserRole } from './auth.interface';
 import config from '../../config';
 import bcrypt from 'bcrypt';
+
+const addressSchema = new Schema<IAddress>({
+  street: { type: String, required: true },
+  city: { type: String, required: true },
+  state: { type: String, required: true },
+  postalCode: { type: String, required: true },
+  country: { type: String, required: true },
+});
 
 // Create the User schema based on the interface
 const userSchema = new Schema<IUser, UserModel>(
@@ -64,6 +72,11 @@ const userSchema = new Schema<IUser, UserModel>(
       type: String,
       default: null,
     },
+    profileImage: { type: String, required: false },
+    phoneNo: { type: String, required: false },
+    gender: { type: String, required: false },
+    dateOfBirth: { type: String, required: false },
+    address: { type: addressSchema, required: false },
   },
   {
     timestamps: true,

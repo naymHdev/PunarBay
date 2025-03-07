@@ -17,6 +17,15 @@ interface IUserInfo {
   os?: string; // Optional OS name (Windows, MacOS, etc.)
   userAgent?: string; // Optional user agent string
 }
+
+export interface IAddress {
+  street: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+}
+
 // User Schema Definition
 export interface IUser extends Document {
   name: string;
@@ -26,10 +35,14 @@ export interface IUser extends Document {
   userInfo: IUserInfo;
   lastLogin: Date;
   isActive: boolean;
-  otpToken: string | null; // Explicitly set as nullable
-  readonly createdAt: Date; // `readonly` to prevent manual modification
+  otpToken: string | null;
+  readonly createdAt: Date;
   updatedAt: Date;
   profileImage?: string;
+  address?: IAddress;
+  phoneNo?: string;
+  gender?: string;
+  dateOfBirth?: string;
 }
 
 export interface IAuth {

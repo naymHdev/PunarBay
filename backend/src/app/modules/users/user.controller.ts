@@ -20,6 +20,8 @@ const myProfile = catchAsync(async (req, res) => {
 });
 
 const updateProfile = catchAsync(async (req, res) => {
+//   console.log('req.body', req.body);
+
   const result = await UserServices.updateProfile(
     req.body,
     req.file as IImageFile,
