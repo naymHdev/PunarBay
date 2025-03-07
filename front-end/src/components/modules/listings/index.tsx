@@ -1,29 +1,48 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useUser } from "@/contexts/UserContext";
+import { deleteListing } from "@/services/listings";
 import { TLIsting } from "@/types/listings";
 import { currencyFormatter } from "@/utils/currencyFormatter";
 import clsx from "clsx";
 import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "sonner";
 
 type TListingsProps = {
   allListings: TLIsting[];
 };
 
 const ManageListings = ({ allListings }: TListingsProps) => {
-  //   console.log("allListings", allListings);
+  // console.log("allListings", allListings);
 
-  const handleListingDelete = (id: string) => {
-    console.log(id);
+  const { user } = useUser();
+  // console.log("user", user);
+
+  const isMyAds = allListings.filter((itm) => itm.userID.email === user?.email);
+  // console.log("isMyAds", isMyAds);
+
+  const handleListingDelete = async (id: string) => {
+    try {
+      const res = await deleteListing(id);
+
+      if (res.success) {
+        toast.success(res.message);
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error) {
+      console.error("Unexpected error during deletion:", error);
+    }
   };
 
   return (
     <>
       <div className=" mb-6 border-neutral-400">
         <div className="flex items-center justify-between">
-          <h2 className=" text-2xl font-bold">My Products</h2>
+          <h2 className=" text-2xl font-bold">My Ads</h2>
           <Link href="/user/post-ad">
             <Button
               className={clsx(
@@ -36,8 +55,8 @@ const ManageListings = ({ allListings }: TListingsProps) => {
         </div>
       </div>
       <div className="space-y-8">
-        {allListings &&
-          allListings.map(
+        {isMyAds &&
+          isMyAds?.map(
             ({
               title,
               images,
@@ -97,9 +116,9 @@ const ManageListings = ({ allListings }: TListingsProps) => {
                   </div>
                   <div className="mt-6 flex gap-4">
                     <Button
-                      onClick={() => handleListingDelete(categories?._id)}
+                      onClick={() => handleListingDelete(_id)}
                       className={clsx(
-                        "bg-red-500 hover:bg-red-600 text-white font-medium px-6 py-2 rounded-lg"
+                        "bg-red-500 hover:bg-red-600 hover:cursor-pointer text-white font-medium px-6 py-2 rounded-lg"
                       )}
                     >
                       Remove
@@ -108,7 +127,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
                     <Link href="/user/update-listing">
                       <Button
                         className={clsx(
-                          "bg-[#1575B9] hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg"
+                          "bg-[#1575B9] hover:cursor-pointer hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg"
                         )}
                       >
                         Update

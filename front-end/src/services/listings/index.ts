@@ -77,3 +77,24 @@ export const getSingleListing = async (id: string) => {
     return Error(error.message);
   }
 };
+
+export const deleteListing = async (id: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/listings/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    // if (!res.ok) {
+    //   throw new Error(`Failed to delete listing:`);
+    // }
+
+    revalidateTag("LISTING");
+
+    return await res.json();
+  } catch (error: any) {
+    return new Error(error.message);
+  }
+};
