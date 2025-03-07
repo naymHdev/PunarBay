@@ -20,4 +20,6 @@ router.put(
   UserController.updateProfile,
 );
 
+router.delete('/:id', auth(UserRole.USER), UserController.deleteProfile);
+
 export const UserRoutes = router;

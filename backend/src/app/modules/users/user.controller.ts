@@ -20,7 +20,7 @@ const myProfile = catchAsync(async (req, res) => {
 });
 
 const updateProfile = catchAsync(async (req, res) => {
-//   console.log('req.body', req.body);
+  //   console.log('req.body', req.body);
 
   const result = await UserServices.updateProfile(
     req.body,
@@ -36,7 +36,21 @@ const updateProfile = catchAsync(async (req, res) => {
   });
 });
 
+const deleteProfile = catchAsync(async (req, res) => {
+  const isUser = req.user as IJwtPayload;
+
+  const result = await UserServices.deleteUser(isUser);
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: `Profile deleted successfully`,
+    data: result,
+  });
+});
+
 export const UserController = {
   myProfile,
   updateProfile,
+  deleteProfile,
 };
