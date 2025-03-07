@@ -5,11 +5,15 @@ import AppError from '../errors/appError';
 import catchAsync from '../utils/catchAsync';
 import { StatusCodes } from 'http-status-codes';
 import User from '../modules/auth/auth.model';
-import { TUserRole } from '../modules/auth/auth.interface';
+import { UserRole } from '../modules/auth/auth.interface';
 
-const auth = (...requiredRoles: TUserRole[]) => {
+const auth = (...requiredRoles: UserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization;
+    let token = req.headers.authorization;
+
+    if (!token) {
+      token = req.cookies?.refreshToken;
+    }
 
     // console.log('auth__token', token);
 
@@ -18,13 +22,16 @@ const auth = (...requiredRoles: TUserRole[]) => {
     }
 
     try {
-      const decoded = jwt.verify(
-        token,
-        config.jwt_access_secret as string,
-      ) as JwtPayload;
+      const secret =
+        req.cookies?.refreshToken && !req.headers.authorization
+          ? config.jwt_refresh_secret
+          : config.jwt_access_secret;
 
-      // console.log("decoded", decoded);
+      const decoded = jwt.verify(token, secret as string) as JwtPayload;
+
       const { role, email } = decoded;
+
+      // console.log('roles__', requiredRoles, role);
 
       const user = await User.findOne({ email, role, isActive: true });
 
@@ -43,6 +50,8 @@ const auth = (...requiredRoles: TUserRole[]) => {
         email: user.email,
         role: user.role,
       } as JwtPayload;
+
+      // console.log('decoded_user', req.user);
       next();
     } catch (error) {
       if (error instanceof TokenExpiredError) {

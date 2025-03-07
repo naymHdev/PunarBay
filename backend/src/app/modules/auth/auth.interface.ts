@@ -37,14 +37,6 @@ export interface IAuth {
   userInfo: IUserInfo;
 }
 
-export interface IJwtPayload {
-  userId: string;
-  name: string;
-  email: string;
-  role: UserRole;
-  isActive: boolean;
-}
-
 export interface UserModel extends Model<IUser> {
   //instance methods for checking if passwords are matched
   isPasswordMatched(
@@ -56,3 +48,11 @@ export interface UserModel extends Model<IUser> {
 }
 
 export type TUserRole = keyof typeof UserRole;
+
+export interface IJwtPayload {
+  _id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  isActive: boolean;
+}
