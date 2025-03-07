@@ -4,12 +4,14 @@ import config from '../config';
 import AppError from '../errors/appError';
 import catchAsync from '../utils/catchAsync';
 import { StatusCodes } from 'http-status-codes';
-import { UserRole } from '../modules/auth/auth.interface';
 import User from '../modules/auth/auth.model';
+import { TUserRole } from '../modules/auth/auth.interface';
 
-const auth = (...requiredRoles: UserRole[]) => {
+const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
+
+    console.log('auth__token', token);
 
     if (!token) {
       throw new AppError(StatusCodes.UNAUTHORIZED, 'You are not authorized!');
@@ -21,6 +23,7 @@ const auth = (...requiredRoles: UserRole[]) => {
         config.jwt_access_secret as string,
       ) as JwtPayload;
 
+      // console.log("decoded", decoded);
       const { role, email } = decoded;
 
       const user = await User.findOne({ email, role, isActive: true });
@@ -33,7 +36,13 @@ const auth = (...requiredRoles: UserRole[]) => {
         throw new AppError(StatusCodes.UNAUTHORIZED, 'You are not authorized!');
       }
 
-      req.user = decoded as JwtPayload & { role: string };
+      // req.user = decoded as JwtPayload & { role: string };
+
+      req.user = {
+        _id: user._id,
+        email: user.email,
+        role: user.role,
+      } as JwtPayload;
       next();
     } catch (error) {
       if (error instanceof TokenExpiredError) {

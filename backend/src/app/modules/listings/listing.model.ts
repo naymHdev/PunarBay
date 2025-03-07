@@ -23,7 +23,7 @@ const ListingSchema = new Schema<IListing>(
     userID: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
+      required: [true, 'Login first than post your ad!'],
     },
     status: {
       type: String,

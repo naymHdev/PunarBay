@@ -21,7 +21,6 @@ interface IUserInfo {
 export interface IUser extends Document {
   name: string;
   email: string;
-  phoneNumber: string;
   password: string;
   role: UserRole;
   userInfo: IUserInfo;
@@ -42,7 +41,6 @@ export interface IJwtPayload {
   userId: string;
   name: string;
   email: string;
-  phoneNumber: string;
   role: UserRole;
   isActive: boolean;
 }
@@ -56,3 +54,5 @@ export interface UserModel extends Model<IUser> {
   isUserExistsByEmail(id: string): Promise<IUser>;
   checkUserExist(userId: string): Promise<IUser>;
 }
+
+export type TUserRole = keyof typeof UserRole;

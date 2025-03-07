@@ -3,9 +3,9 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { ListingServices } from './listing.service';
 import { IImageFiles } from '../../interface/IImageFile';
-import { IJwtPayload } from '../auth/auth.interface';
 
 const createListing = catchAsync(async (req, res) => {
+  // console.log("Received Data:", req.body);
   const result = await ListingServices.createListingIntoDB(
     req.body,
     req.files as IImageFiles,
@@ -21,8 +21,6 @@ const createListing = catchAsync(async (req, res) => {
 
 const getAllListings = catchAsync(async (req, res) => {
   const result = await ListingServices.getALlListingsFromDB(req.query);
-
-  // console.log('result', result);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
@@ -47,14 +45,10 @@ const getSingleListing = catchAsync(async (req, res) => {
 
 const deleteListingProduct = catchAsync(async (req, res) => {
   const {
-    user,
     params: { id },
   } = req;
 
-  const result = await ListingServices.deleteListingFromDB(
-    user as IJwtPayload,
-    id,
-  );
+  const result = await ListingServices.deleteListingFromDB(id);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,

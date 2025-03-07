@@ -4,8 +4,6 @@ import { IImageFiles } from '../../interface/IImageFile';
 import { ConditionType, IListing } from './listing.interface';
 import { Listing } from './listing.model';
 import QueryBuilder from '../../builder/QueryBuilder';
-import { IJwtPayload } from '../auth/auth.interface';
-import User from '../auth/auth.model';
 
 const createListingIntoDB = async (
   productData: Partial<IListing>,
@@ -69,23 +67,34 @@ const getALlListingsFromDB = async (query: Record<string, unknown>) => {
     }
   }
 
-  const listingsQuery = new QueryBuilder(Listing.find(filter), pQuery)
+  const listingsQuery = new QueryBuilder(
+    Listing.find(filter).populate('categories').populate({
+      path: 'userID',
+      select: 'name email lastLogin isActive',
+    }),
+    pQuery,
+  )
     .search(['title', 'description'])
     .filter()
+    .sort()
+    .paginate()
     .fields()
     .priceRange(Number(minPrice) || 0, Number(maxPrice) || Infinity);
 
-  const proucts = await listingsQuery.modelQuery.lean();
+  const products = await listingsQuery.modelQuery.lean();
   const meta = await listingsQuery.countTotal();
 
   return {
-    result: proucts,
+    result: products,
     meta,
   };
 };
 
 const getSingleListingFromDB = async (id: string) => {
-  const product = await Listing.findById(id);
+  const product = await Listing.findById(id).populate('categories').populate({
+    path: 'userID',
+    select: 'name email lastLogin isActive',
+  });
 
   if (!product) {
     throw new AppError(StatusCodes.NOT_FOUND, 'Listing Product not found');
@@ -96,17 +105,10 @@ const getSingleListingFromDB = async (id: string) => {
   return productObj;
 };
 
-const deleteListingFromDB = async (authUser: IJwtPayload, id: string) => {
-  const user = await User.findById(authUser.userId);
-
-  // Find the product with matching user
+const deleteListingFromDB = async (id: string) => {
   const product = await Listing.findOne({
     _id: id,
   });
-
-  if (!user?.isActive) {
-    throw new AppError(StatusCodes.BAD_REQUEST, 'User is not active');
-  }
 
   if (!product) {
     throw new AppError(StatusCodes.NOT_FOUND, 'Product Not Found');

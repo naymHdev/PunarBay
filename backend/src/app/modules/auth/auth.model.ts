@@ -13,11 +13,6 @@ const userSchema = new Schema<IUser, UserModel>(
       type: String,
       required: true,
     },
-    phoneNumber: {
-      type: String,
-      unique: true,
-      default: '',
-    },
     email: {
       type: String,
       required: true,

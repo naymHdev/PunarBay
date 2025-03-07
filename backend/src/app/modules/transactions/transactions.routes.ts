@@ -1,21 +1,20 @@
 import { Router } from 'express';
 import { TransactionController } from './transactions.controller';
 import auth from '../../middleware/auth';
-import { UserRole } from '../auth/auth.interface';
 import validateRequest from '../../middleware/validateRequest';
 import { TransactionValidations } from './transactions.validation';
 
 const router = Router();
 
-router.get('/', auth(UserRole.USER));
+router.get('/', auth('USER'));
 
 router.post(
   '/',
-  auth(UserRole.USER),
+  auth('USER'),
   validateRequest(TransactionValidations.TransactionValidationSchema),
   TransactionController.createTransaction,
 );
 
-router.put('/:id', auth(UserRole.USER));
+router.put('/:id', auth('USER'));
 
 export const TransactionRoutes = router;

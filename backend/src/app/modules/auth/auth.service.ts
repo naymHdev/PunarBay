@@ -30,7 +30,6 @@ const loginUser = async (payload: IAuth) => {
       userId: user._id as string,
       name: user.name as string,
       email: user.email as string,
-      phoneNumber: user.phoneNumber as string,
       isActive: user.isActive,
       role: user.role,
     };
@@ -40,6 +39,8 @@ const loginUser = async (payload: IAuth) => {
       config.jwt_access_secret as string,
       config.jwt_access_expires_in as string,
     );
+
+    // console.log('accessToken', accessToken);
 
     const refreshToken = createToken(
       jwtPayload,
@@ -138,7 +139,6 @@ const refreshToken = async (token: string) => {
     userId: isUserExist._id as string,
     name: isUserExist.name as string,
     email: isUserExist.email as string,
-    phoneNumber: isUserExist.phoneNumber,
     isActive: isUserExist.isActive,
     role: isUserExist.role,
   };
