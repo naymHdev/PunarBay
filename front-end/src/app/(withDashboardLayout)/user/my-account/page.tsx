@@ -1,9 +1,12 @@
 import MyAccount from "@/components/modules/dashboard/myProfile";
+import PBContainer from "@/components/ui/PBContainer";
 
 const MyAccountPage = async () => {
   return (
     <>
-      <MyAccount />
+      <PBContainer maxWidth="7xl">
+        <MyAccount />
+      </PBContainer>
     </>
   );
 };
