@@ -118,9 +118,32 @@ const deleteListingFromDB = async (id: string) => {
   return result;
 };
 
+const updateListing = async (
+  id: string,
+  payload: Partial<IListing>,
+  productImages: IImageFiles,
+) => {
+  const { images } = productImages;
+
+  const listingProduct = await Listing.findOne({
+    _id: id,
+  });
+
+  if (!listingProduct) {
+    throw new AppError(StatusCodes.NOT_FOUND, 'Listing Product Not Found');
+  }
+
+  if (images && images.length > 0) {
+    payload.images = images.map((image) => image.path);
+  }
+
+  return await Listing.findByIdAndUpdate(id, payload, { new: true });
+};
+
 export const ListingServices = {
   createListingIntoDB,
   getALlListingsFromDB,
   getSingleListingFromDB,
   deleteListingFromDB,
+  updateListing,
 };

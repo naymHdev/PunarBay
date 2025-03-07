@@ -58,9 +58,30 @@ const deleteListingProduct = catchAsync(async (req, res) => {
   });
 });
 
+const updateListing = catchAsync(async (req, res) => {
+  const {
+    body: payload,
+    params: { id },
+  } = req;
+
+  const result = await ListingServices.updateListing(
+    id,
+    payload,
+    req.files as IImageFiles,
+  );
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Product updated successfully',
+    data: result,
+  });
+});
+
 export const ListingControllers = {
   createListing,
   getAllListings,
   getSingleListing,
   deleteListingProduct,
+  updateListing,
 };
