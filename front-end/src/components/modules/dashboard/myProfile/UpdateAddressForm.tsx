@@ -19,30 +19,41 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { useUser } from "@/contexts/UserContext";
-import { getMyProfile } from "@/services/users";
-import { IUser } from "@/types/user";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { updateProfile } from "@/services/users";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const UpdateAddressForm = () => {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
-
   const { user } = useUser();
+  const router = useRouter();
 
   const form = useForm({
     defaultValues: {
-      name: "",
+      name: "Naym Hossen",
       profileImage: "",
       address: {
-        street: "",
-        city: "",
-        state: "",
-        postalCode: "",
-        country: "",
+        street: "123 Main St",
+        city: "New York",
+        state: "NY",
+        postalCode: "10001",
+        country: "USA",
       },
-      phoneNo: "",
-      gender: "",
+      phoneNo: "01770064053",
+      gender: "Male",
       dateOfBirth: "",
     },
   });
@@ -52,32 +63,33 @@ const UpdateAddressForm = () => {
   } = form;
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const modifiedData = {
-      ...data,
-      price: parseFloat(data.price),
-    };
+    // console.log("modifiedData__", data);
 
-    console.log("modifiedData__", modifiedData);
+    if (!user?._id) {
+      toast.error("User ID is missing!");
+      return;
+    }
 
-    // const formData = new FormData();
-    // formData.append("data", JSON.stringify(modifiedData));
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
 
-    // for (const file of imageFiles) {
-    //   formData.append("images", file);
-    // }
-    // try {
-    //   const res = await updateListingProduct(formData, product._id);
-    //   //   console.log("updateListingProduct", res);
+    if (imageFiles.length > 0) {
+      formData.append("profileImage", imageFiles[0] as File);
+    }
 
-    //   if (res.success) {
-    //     toast.success(res.message);
-    //     router.push("/user/dashboard");
-    //   } else {
-    //     toast.error(res.message);
-    //   }
-    // } catch (err: any) {
-    //   console.error(err);
-    // }
+    try {
+      const res = await updateProfile(user?._id!, formData);
+      // console.log("update Profile", res);
+
+      if (res.success) {
+        toast.success(res.message);
+        router.push("/user/my-account");
+      } else {
+        toast.error(res.message);
+      }
+    } catch (err: any) {
+      console.error(err);
+    }
   };
 
   return (
@@ -99,7 +111,7 @@ const UpdateAddressForm = () => {
       {/* Update profile address form */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="mt-5 border-2 border-gray-300 rounded-xl flex-grow max-w-2xl p-5">
+          <div className="mt-5 border-2 border-gray-300 bg-white rounded-xl flex-grow max-w-2xl p-5">
             <div className="grid grid-cols-1 gap-4">
               <FormField
                 control={form.control}
@@ -114,7 +126,6 @@ const UpdateAddressForm = () => {
                   </FormItem>
                 )}
               />
-
               <div>
                 <div className="flex justify-between items-center border-t border-b py-3 my-5">
                   <p className="text-primary text-xl">Profile Image</p>
@@ -136,7 +147,6 @@ const UpdateAddressForm = () => {
                   </div>
                 )}
               </div>
-
               <FormField
                 control={form.control}
                 name="address.street"
@@ -150,7 +160,6 @@ const UpdateAddressForm = () => {
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="address.city"
@@ -164,7 +173,6 @@ const UpdateAddressForm = () => {
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="address.state"
@@ -178,7 +186,6 @@ const UpdateAddressForm = () => {
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="address.postalCode"
@@ -192,7 +199,6 @@ const UpdateAddressForm = () => {
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="address.country"
@@ -206,7 +212,6 @@ const UpdateAddressForm = () => {
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="phoneNo"
@@ -220,7 +225,6 @@ const UpdateAddressForm = () => {
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="gender"
@@ -252,16 +256,58 @@ const UpdateAddressForm = () => {
                 control={form.control}
                 name="dateOfBirth"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Your Birth Date</FormLabel>
-                    <FormControl>
-                      <Input {...field} value={field.value || ""} />
-                    </FormControl>
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Date of birth</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-[240px] pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        className="w-auto p-0 bg-gray-100"
+                        align="start"
+                      >
+                        <Calendar
+                          mode="single"
+                          selected={
+                            field.value ? new Date(field.value) : undefined
+                          }
+                          onSelect={(date) =>
+                            field.onChange(date ? date.toISOString() : "")
+                          }
+                          disabled={(date) =>
+                            date > new Date() || date < new Date("1900-01-01")
+                          }
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="mt-5 w-full bg-[#1A78BA] text-white hover:bg-[#1A78BA] hover:cursor-pointer"
+            >
+              {isSubmitting ? "Updating...." : "Update Profile"}
+            </Button>
           </div>
         </form>
       </Form>

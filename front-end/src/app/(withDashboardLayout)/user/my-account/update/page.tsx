@@ -5,7 +5,7 @@ const UpdateAccountPage = async () => {
   return (
     <>
       <PBContainer maxWidth="7xl">
-        <div>
+        <div className=" mb-10">
           <UpdateAddressForm />
         </div>
       </PBContainer>
