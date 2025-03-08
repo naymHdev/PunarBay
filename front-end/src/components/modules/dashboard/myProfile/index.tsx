@@ -7,7 +7,8 @@ import { IUser } from "@/types/user";
 import { Pencil, User, WalletMinimal } from "lucide-react";
 import { useEffect, useState } from "react";
 import AdDashboard from "./AdDashboard";
-import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import MyAddress from "./MyAddress";
 
 const MyAccount = () => {
   const [isUser, setIsUser] = useState<IUser | null>(null);
@@ -37,7 +38,20 @@ const MyAccount = () => {
         <div className="flex justify-between">
           <div className=" flex  gap-4">
             <div className=" rounded-full border border-neutral-200 bg-gray-100 h-20 w-20 flex items-center justify-center">
-              <User size={32} />
+              {isUser?.profileImage ? (
+                <>
+                  <Avatar className="h-20 w-20">
+                    <AvatarImage src={isUser?.profileImage} />
+                    <AvatarFallback>
+                      <User size={32} />
+                    </AvatarFallback>
+                  </Avatar>
+                </>
+              ) : (
+                <>
+                  <User size={32} />
+                </>
+              )}
             </div>
             <div>
               <h2 className=" text-2xl font-medium">{isUser?.name}</h2>
@@ -71,14 +85,7 @@ const MyAccount = () => {
 
       {/* Address Section */}
       <section className="mt-8 z-50 bg-white p-4 md:p-5 rounded-2xl border border-neutral-200">
-        <Link href="/user/my-account/update">
-          <Button
-            variant="outline"
-            className="border-[#1A78BA] hover:cursor-pointer text-[#1A78BA]"
-          >
-            Add Your Address
-          </Button>
-        </Link>
+        <MyAddress isUser={isUser} />
       </section>
       <section className="mt-8">
         <AdDashboard />
