@@ -18,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
+import { logout } from "@/services/auth";
 
 const MyAccount = () => {
   const [isUser, setIsUser] = useState<IUser | null>(null);
@@ -55,7 +56,12 @@ const MyAccount = () => {
 
       // console.log("res", res);
 
-      toast.success(res.message);
+      if (res.success) {
+        logout();
+        toast.success(res.message);
+      } else {
+        toast.error(res.message);
+      }
 
       // Redirect user to homepage after account deletion
       setTimeout(() => {

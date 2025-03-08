@@ -17,7 +17,8 @@ const MyAddress = ({ isUser }: { isUser: IUser | null }) => {
                   variant="outline"
                   className="border-[#1A78BA] hover:cursor-pointer text-[#1A78BA]"
                 >
-                  Add/Update <Plus />
+                  Add/Update
+                  <Plus />
                 </Button>
               </Link>
             </CardTitle>
@@ -26,12 +27,12 @@ const MyAddress = ({ isUser }: { isUser: IUser | null }) => {
             <div>
               <p className="text-sm font-semibold text-gray-500">Address</p>
               <p className="text-base">
-                {isUser?.address?.street}, {isUser?.address?.city}
+                {isUser?.address?.street || "N/A"}, {isUser?.address?.city}
               </p>
               <p className="text-base">
-                {isUser?.address?.state}, {isUser?.address?.postalCode}
+                {isUser?.address?.state || "N/A"}, {isUser?.address?.postalCode}
               </p>
-              <p className="text-base">{isUser?.address?.country}</p>
+              <p className="text-base">{isUser?.address?.country || "N/A"}</p>
             </div>
 
             <div>

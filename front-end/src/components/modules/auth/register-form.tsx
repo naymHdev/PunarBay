@@ -21,11 +21,14 @@ import {
 } from "@/components/ui/form";
 import { toast } from "sonner";
 import { register } from "@/services/auth";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
   const form = useForm({
     resolver: zodResolver(registrationSchema),
   });
+
+  const router = useRouter();
 
   const {
     formState: { isSubmitting },
@@ -37,6 +40,7 @@ const RegisterForm = () => {
       // console.log("res--------->", res);
       if (res?.success) {
         toast.error(res?.message);
+        router.push("/");
       } else {
         toast.error(res?.message);
       }
