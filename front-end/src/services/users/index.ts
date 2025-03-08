@@ -43,3 +43,20 @@ export const updateProfile = async (
     throw error;
   }
 };
+
+export const deleteUser = async (id: string): Promise<any> => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/users/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: (await cookies()).get("accessToken")!.value,
+      },
+    });
+
+    revalidateTag("USER");
+    return await res.json();
+  } catch (error: any) {
+    console.error("Failed to fetch profile:", error);
+    throw error;
+  }
+};

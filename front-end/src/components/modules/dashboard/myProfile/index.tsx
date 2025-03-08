@@ -2,13 +2,22 @@
 
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/contexts/UserContext";
-import { getMyProfile } from "@/services/users";
+import { deleteUser, getMyProfile } from "@/services/users";
 import { IUser } from "@/types/user";
-import { Pencil, User, WalletMinimal } from "lucide-react";
+import { EllipsisVertical, User, WalletMinimal } from "lucide-react";
 import { useEffect, useState } from "react";
 import AdDashboard from "./AdDashboard";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import MyAddress from "./MyAddress";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 
 const MyAccount = () => {
   const [isUser, setIsUser] = useState<IUser | null>(null);
@@ -30,7 +39,34 @@ const MyAccount = () => {
     fetchData();
   }, [user?._id]);
 
-  // console.log("isUser__", isUser);
+  const handleDeleteAccount = async (userId: string) => {
+    if (!userId) {
+      toast.error("User ID is missing!");
+      return;
+    }
+
+    const confirmDelete = confirm(
+      "Are you sure you want to delete your account? This action cannot be undone."
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const res = await deleteUser(user?._id as string);
+
+      // console.log("res", res);
+
+      toast.success(res.message);
+
+      // Redirect user to homepage after account deletion
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 2000);
+    } catch (error: any) {
+      toast.error(
+        error.message || "An error occurred while deleting the account."
+      );
+    }
+  };
 
   return (
     <>
@@ -59,12 +95,26 @@ const MyAccount = () => {
             </div>
           </div>
           <div>
-            <Button
-              variant="outline"
-              className=" border-[#1A78BA] text-[#1A78BA]"
-            >
-              <Pencil /> Edit
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <EllipsisVertical className="text-[#1A78BA]" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className=" bg-gray-100 border-neutral-300">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Button
+                    onClick={() =>
+                      isUser?._id && handleDeleteAccount(isUser._id)
+                    }
+                    disabled={!isUser?._id}
+                    className=" text-white hover:cursor-pointer bg-red-500 hover:bg-red-700"
+                  >
+                    Delete Account
+                  </Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
         <div className=" border-b border-neutral-200 my-5" />

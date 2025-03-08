@@ -5,7 +5,9 @@ const MyAccountPage = async () => {
   return (
     <>
       <PBContainer maxWidth="7xl">
-        <MyAccount />
+        <div className="pb-10">
+          <MyAccount />
+        </div>
       </PBContainer>
     </>
   );
