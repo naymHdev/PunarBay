@@ -77,7 +77,7 @@ const UpdateListingForm = ({ product }: { product: TLIsting }) => {
     }
     try {
       const res = await updateListingProduct(formData, product._id);
-    //   console.log("updateListingProduct", res);
+      //   console.log("updateListingProduct", res);
 
       if (res.success) {
         toast.success(res.message);

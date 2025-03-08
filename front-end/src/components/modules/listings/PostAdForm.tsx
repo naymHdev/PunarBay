@@ -70,7 +70,7 @@ const PostAdForm = () => {
     const modifiedData = {
       ...data,
       price: parseFloat(data.price),
-      userID: user?.userId,
+      userID: user?._id,
     };
 
     // console.log("modifiedData__", modifiedData);

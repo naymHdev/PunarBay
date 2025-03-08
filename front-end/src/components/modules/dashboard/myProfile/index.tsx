@@ -1,24 +1,25 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import PBButton from "@/components/ui/PBButton";
 import { useUser } from "@/contexts/UserContext";
 import { getMyProfile } from "@/services/users";
 import { IUser } from "@/types/user";
 import { Pencil, User, WalletMinimal } from "lucide-react";
 import { useEffect, useState } from "react";
 import AdDashboard from "./AdDashboard";
+import Link from "next/link";
 
 const MyAccount = () => {
   const [isUser, setIsUser] = useState<IUser | null>(null);
   const { user } = useUser();
+  // console.log("user__", user);
 
   useEffect(() => {
-    if (!user?.userId) return;
+    if (!user?._id) return;
 
     const fetchData = async () => {
       try {
-        const userData = await getMyProfile(user.userId);
+        const userData = await getMyProfile(user?._id);
         setIsUser(userData.data);
       } catch (error) {
         console.error("Error fetching profile:", error);
@@ -26,16 +27,16 @@ const MyAccount = () => {
     };
 
     fetchData();
-  }, [user?.userId]);
+  }, [user?._id]);
 
-  //   console.log("isUser__", isUser);
+  // console.log("isUser__", isUser);
 
   return (
     <>
-      <section className=" bg-white p-4 md:p-5 rounded-2xl border border-neutral-300">
+      <section className=" bg-white p-4 md:p-5 rounded-2xl border border-neutral-200">
         <div className="flex justify-between">
           <div className=" flex  gap-4">
-            <div className=" rounded-full border border-neutral-300 bg-gray-100 h-20 w-20 flex items-center justify-center">
+            <div className=" rounded-full border border-neutral-200 bg-gray-100 h-20 w-20 flex items-center justify-center">
               <User size={32} />
             </div>
             <div>
@@ -52,7 +53,7 @@ const MyAccount = () => {
             </Button>
           </div>
         </div>
-        <div className=" border-b border-neutral-300 my-5" />
+        <div className=" border-b border-neutral-200 my-5" />
         <div className=" flex items-center gap-3">
           <WalletMinimal className="text-[#1A78BA] size-8" />
           <h3 className=" text-md font-2nd">
@@ -69,10 +70,15 @@ const MyAccount = () => {
       </section>
 
       {/* Address Section */}
-      <section className="mt-8 bg-white p-4 md:p-5 rounded-2xl border border-neutral-300">
-        <Button variant="outline" className="border-[#1A78BA] text-[#1A78BA]">
-          Add Your Address
-        </Button>
+      <section className="mt-8 z-50 bg-white p-4 md:p-5 rounded-2xl border border-neutral-200">
+        <Link href="/user/my-account/update">
+          <Button
+            variant="outline"
+            className="border-[#1A78BA] hover:cursor-pointer text-[#1A78BA]"
+          >
+            Add Your Address
+          </Button>
+        </Link>
       </section>
       <section className="mt-8">
         <AdDashboard />
