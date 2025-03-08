@@ -39,7 +39,7 @@ const PostAdForm = () => {
   const [categories, setCategories] = useState<TCategory[] | []>([]);
 
   const { user } = useUser();
-  // console.log("userId__", user?.userId);
+  // console.log("userId__", user);
   const router = useRouter();
 
   const form = useForm({
