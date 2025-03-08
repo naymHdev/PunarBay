@@ -69,7 +69,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
             }) => (
               <div
                 key={_id}
-                className="bg-white  p-4 rounded-2xl flex gap-8 justify-between"
+                className="bg-white border border-neutral-300  p-4 md:p-5 rounded-2xl flex gap-8 justify-between"
               >
                 <div>
                   <div className=" space-y-2">
