@@ -19,8 +19,18 @@ const ListingsPage = async ({
   );
 
   const availableProduct = allListings.filter(
-    (itm: TLIsting) => itm.status === "available"
+    (itm: TLIsting) => itm.status === "available" && itm.userID !== null
   );
+
+  if (availableProduct.length === 0) {
+    return (
+      <>
+        <div className=" flex h-screen justify-center items-center text-[#1575B9]">
+          No Product Available!
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
