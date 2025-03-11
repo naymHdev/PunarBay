@@ -4,6 +4,7 @@ import { ListingRoutes } from '../modules/listings/listing.routes';
 import { CategoryRoutes } from '../modules/category/category.routes';
 import { TransactionRoutes } from '../modules/transactions/transactions.routes';
 import { UserRoutes } from '../modules/users/user.routes';
+import { WishlistRouters } from '../modules/wishlist/wishlist.routes';
 
 const router = Router();
 
@@ -27,6 +28,10 @@ const moduleRoutes = [
   {
     path: '/transactions',
     route: TransactionRoutes,
+  },
+  {
+    path: '/wishlists',
+    route: WishlistRouters,
   },
 ];
 
