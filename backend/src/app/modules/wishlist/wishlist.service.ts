@@ -57,17 +57,36 @@ const getWishlist = async (authUser: IJwtPayload) => {
   return result;
 };
 
-const removeFromWishlist = async (userId: string, productId: string) => {
-  const wishlist = await Wishlist.findOneAndUpdate(
-    { userId },
-    { $pull: { items: { productId } } },
-    { new: true },
-  );
-  return wishlist;
+const deleteWishlist = async (id: string, authUser: IJwtPayload) => {
+  try {
+    const wishlist = await Wishlist.findOne({ user: authUser._id });
+
+    if (!wishlist) {
+      throw new Error('Wishlist not found.');
+    }
+    // Find the index of the product in the products array
+    const productIndex = wishlist.products.findIndex(
+      (item) => item.product.toString() === id.toString(),
+    );
+
+    if (productIndex === -1) {
+      throw new Error('Product not found in your wishlist.');
+    }
+
+    // Remove the product from the wishlist
+    wishlist.products.splice(productIndex, 1);
+
+    // Save the updated wishlist
+    const updatedWishlist = await wishlist.save();
+
+    return updatedWishlist;
+  } catch (error: any) {
+    throw new Error(error.message || 'Failed to delete wishlist');
+  }
 };
 
 export const WishlistServices = {
   getWishlist,
   addToWishlist,
-  removeFromWishlist,
+  deleteWishlist,
 };

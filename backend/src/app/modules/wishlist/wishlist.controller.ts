@@ -29,7 +29,24 @@ const getMyWishlist = catchAsync(async (req, res) => {
   });
 });
 
+const deleteWishlist = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const result = await WishlistServices.deleteWishlist(
+    id,
+    req.user as IJwtPayload,
+  );
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Wishlist removed successfully',
+    data: result,
+  });
+});
+
 export const WishlistControllers = {
   addToWishlist,
   getMyWishlist,
+  deleteWishlist,
 };
