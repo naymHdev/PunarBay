@@ -1,10 +1,12 @@
 import { Types } from 'mongoose';
 
+type TProduct = {
+  product: Types.ObjectId;
+};
+
 export type TWishlist = {
-  _id: Types.ObjectId;
-  userId: Types.ObjectId;
-  items: {
-    productId: Types.ObjectId;
-    addedAt: Date;
-  }[];
+  user: Types.ObjectId;
+  products: TProduct[];
+  createdAt?: Date;
+  updatedAt?: Date;
 };

@@ -3,21 +3,17 @@ import { TWishlist } from './wishlist.interface';
 
 const WishlistSchema = new Schema<TWishlist>(
   {
-    userId: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
-    items: [
+    products: [
       {
-        productId: {
+        product: {
           type: Schema.Types.ObjectId,
           ref: 'Listing',
           required: true,
-        },
-        addedAt: {
-          type: Date,
-          default: Date.now,
         },
       },
     ],

@@ -14,7 +14,7 @@ const createCategory = async (
 ) => {
   const category = new Category({
     ...categoryData,
-    createdBy: authUser.userId,
+    createdBy: authUser._id,
     icon: icon?.path,
   });
 
