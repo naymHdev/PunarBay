@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { FolderKanban, HomeIcon, UserCog } from "lucide-react";
+import { FolderKanban, HomeIcon, UserCog, FolderHeart } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -33,6 +33,11 @@ const data = {
       url: "/user/dashboard",
       icon: FolderKanban,
       isActive: true,
+    },
+    {
+      title: "My Favourits",
+      url: "/user/my-favourits",
+      icon: FolderHeart,
     },
   ],
 };

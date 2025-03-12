@@ -8,14 +8,31 @@ import { formatDistanceToNow } from "date-fns";
 import { Clock4, Heart } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./button";
+import { addWishlist } from "@/services/wishlist";
+import { TWishlist } from "@/types/wishlist";
+import { toast } from "sonner";
 
 const ProductCard = ({ product }: { product: TLIsting }) => {
   const timeAgo = formatDistanceToNow(new Date(product.createdAt), {
     addSuffix: true,
   });
 
-  const handleWishlist = (id: string) => {
-    console.log(id);
+  const handleWishlist = async (product: TLIsting) => {
+    const wishlistProduct: TWishlist = {
+      products: [{ product: product._id }],
+    };
+
+    try {
+      const res = await addWishlist(wishlistProduct);
+      // console.log(res);
+      if (res.success) {
+        toast.success(res.message);
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    }
   };
 
   return (
@@ -47,7 +64,7 @@ const ProductCard = ({ product }: { product: TLIsting }) => {
                   </h2>
                 </Link>
                 <Button
-                  onClick={() => handleWishlist(product?._id)}
+                  onClick={() => handleWishlist(product)}
                   className=" hover:cursor-pointer bg-none shadow-none text-[#1575B9] text-lg"
                 >
                   <Heart />
