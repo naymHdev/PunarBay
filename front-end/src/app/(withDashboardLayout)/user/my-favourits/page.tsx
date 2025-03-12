@@ -1,9 +1,11 @@
+import { getAllWishlists } from "@/services/wishlist";
 
+const WishlistProductPage = async () => {
+  const wishlists = await getAllWishlists();
 
-const MyFavouritePage = () => {
-  return (
-    <div>MyFavouritePage</div>
-  )
-}
+  console.log("datas", wishlists);
 
-export default MyFavouritePage
+  return <>WishlistProductPage</>;
+};
+
+export default WishlistProductPage;

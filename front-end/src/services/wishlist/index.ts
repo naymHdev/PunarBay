@@ -22,3 +22,23 @@ export const addWishlist = async (wishlistData: TWishlist): Promise<any> => {
     return Error(error);
   }
 };
+
+export const getAllWishlists = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/wishlists`, {
+      method: "GET",
+      headers: {
+        Authorization: (await cookies()).get("accessToken")!.value || "",
+        "Content-Type": "application/json",
+      },
+      next: {
+        tags: ["WISHLIST"],
+      },
+      cache: "no-store",
+    });
+
+    return res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};
