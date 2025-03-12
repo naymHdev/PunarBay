@@ -3,8 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, CheckCircle, Mail } from "lucide-react";
 import { TUser } from "@/types/listings";
+// import { useUser } from "@/contexts/UserContext";
 
 const UserBox = ({ user }: { user: TUser }) => {
+
+  // const {user: isUser} = useUser()
+  // console.log('user__', user);
+  // console.log('isUser__', isUser);
+
   return (
     <div className="w-full rounded-lg bg-blue-100/70 p-4">
       {/* Avatar */}

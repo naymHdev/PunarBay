@@ -22,16 +22,6 @@ const ListingsPage = async ({
     (itm: TLIsting) => itm.status === "available" && itm.userID !== null
   );
 
-  if (availableProduct.length === 0) {
-    return (
-      <>
-        <div className=" flex h-screen justify-center items-center text-[#1575B9]">
-          No Product Available!
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       <div className=" mt-10">
@@ -41,13 +31,18 @@ const ListingsPage = async ({
               <FilterSidebar />
             </div>
             <div className="">
-              {availableProduct &&
+              {availableProduct.length > 0 ? (
                 availableProduct
                   .slice()
                   .reverse()
                   .map((product: TLIsting) => (
                     <ProductCard key={product._id} product={product} />
-                  ))}
+                  ))
+              ) : (
+                <p className=" font-medium text-center text-[#1575B9]">
+                  No Product Available!
+                </p>
+              )}
             </div>
           </div>
         </PBContainer>

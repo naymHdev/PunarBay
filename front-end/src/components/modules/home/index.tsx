@@ -22,7 +22,7 @@ const FeaturedCategories = async () => {
             </Link>
           </div>
           <div className="mt-4 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-4">
-            {categories.map((category: TCategory, idx: number) => (
+            {categories?.map((category: TCategory, idx: number) => (
               <CategoryCard key={idx} category={category} />
             ))}
           </div>

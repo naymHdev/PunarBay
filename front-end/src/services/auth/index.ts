@@ -40,7 +40,7 @@ export const loginUser = async (userData: FieldValues) => {
       },
       body: JSON.stringify(userData),
     });
-    revalidateTag("USER");
+
     const result = await res.json();
 
     if (result.success) {
