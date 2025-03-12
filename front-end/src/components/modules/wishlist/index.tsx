@@ -7,6 +7,8 @@ import { currencyFormatter } from "@/utils/currencyFormatter";
 import { formatDistanceToNow } from "date-fns";
 import { TWishlistProduct } from "@/types/wishlist";
 import { Button } from "@/components/ui/button";
+import { deleteWishlist } from "@/services/wishlist";
+import { toast } from "sonner";
 
 const WishlistProducts = ({
   wishlistItem,
@@ -19,7 +21,19 @@ const WishlistProducts = ({
     addSuffix: true,
   });
 
-  //   console.log("product", product);
+  const handleDeleteWishlist = async (id: string) => {
+    try {
+      const res = await deleteWishlist(id);
+      //   console.log("delete", res);
+      if (res.success) {
+        toast.success(res.message);
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error: any) {
+      return Error(error);
+    }
+  };
 
   return (
     <>
@@ -56,7 +70,10 @@ const WishlistProducts = ({
             <span className="text-lg font-bold text-primary">
               {currencyFormatter(product.price)}
             </span>
-            <Button className="flex items-center gap-2 bg-red-500 hover:bg-red-600 hover:cursor-pointer text-white border-none">
+            <Button
+              onClick={() => handleDeleteWishlist(product._id)}
+              className="flex items-center gap-2 bg-red-500 hover:bg-red-600 hover:cursor-pointer text-white border-none"
+            >
               <Trash2 /> Remove
             </Button>
           </div>
