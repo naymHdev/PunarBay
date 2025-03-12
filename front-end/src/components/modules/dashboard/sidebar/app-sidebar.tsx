@@ -44,11 +44,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar
-      collapsible="icon"
-      {...props}
-      className=" border-none rounded-2xl bg-white m-1"
-    >
+    <Sidebar collapsible="icon" {...props} className=" border-none bg-white">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
