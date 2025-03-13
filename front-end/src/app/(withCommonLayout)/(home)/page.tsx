@@ -1,5 +1,6 @@
 import FeaturedCategories from "@/components/modules/home";
 import BannerSection from "@/components/modules/home/Banner";
+import HighlightCategory from "@/components/modules/home/HighlightCategory";
 import HowItWorksSection from "@/components/modules/home/HowItWorks";
 import MostPopularProducts from "@/components/modules/home/MostPopularProducts";
 import ShopSellWithConfidence from "@/components/modules/home/ShopSellWithConfidence";
@@ -18,6 +19,7 @@ const HomePage = async () => {
       <div className="">
         <BannerSection />
         <FeaturedCategories />
+        <HighlightCategory />
         <MostPopularProducts data={allListings} />
         <HowItWorksSection />
         <ShopSellWithConfidence />
