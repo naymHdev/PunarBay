@@ -1,11 +1,34 @@
-import { Facebook, Instagram, Linkedin, Plus, Twitter } from "lucide-react";
+"use client";
+
+import {
+  Facebook,
+  Instagram,
+  InstagramIcon,
+  Linkedin,
+  Plus,
+  Twitter,
+  TwitterIcon,
+  Youtube,
+} from "lucide-react";
 import PBContainer from "../ui/PBContainer";
 import Link from "next/link";
 import PBButton from "../ui/PBButton";
+import bkash from "../../assets/icons/BKash-bKash2-Logo.wine.svg";
+import nagad from "../../assets/icons/Nagad-Logo.wine.svg";
+import visa from "../../assets/icons/Visa_Inc.-Logo.wine.svg";
+import mastercard from "../../assets/icons/Mastercard-Logo.wine.svg";
+import google from "../../assets/icons/Google_Pay-Logo.wine.svg";
+import nexus from "../../assets/icons/Google_Nexus-Logo.wine.svg";
+import union from "../../assets/icons/MUFG_Union_Bank-Logo.wine.svg";
+import Image from "next/image";
+
+const paymentMethods = [bkash, nagad, visa, mastercard, google, nexus, union];
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-gray-900 text-white py-14">
+    <footer className="bg-gray-900 text-white pt-14 pb-5">
       <PBContainer maxWidth="7xl">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
@@ -43,11 +66,17 @@ const Footer = () => {
               <li>Privacy Policy</li>
               <li>Refund & Return Policy</li>
             </ul>
-            <div className="flex space-x-4 mt-4">
-              <img src="/visa.png" alt="visa" className="w-10" />
-              <img src="/apple-pay.png" alt="apple pay" className="w-10" />
-              <img src="/tabby.png" alt="tabby" className="w-10" />
-              <img src="/tamara.png" alt="tamara" className="w-10" />
+            <div className="flex flex-wrap items-center gap-2 mt-4">
+              {paymentMethods?.map((img, index) => (
+                <div key={index} className=" bg-white rounded-md p-1">
+                  <Image
+                    src={img}
+                    alt={`Payment Method ${index + 1}`}
+                    height={60}
+                    width={60}
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
@@ -59,6 +88,31 @@ const Footer = () => {
               <li>Raise A Claim</li>
               <li>Track Your Claim</li>
             </ul>
+          </div>
+        </div>
+      </PBContainer>
+      <div className=" border-b border-neutral-600 w-full my-10" />
+
+      <PBContainer>
+        <div className=" flex items-center justify-between">
+          <div>
+            <p className=" text-gray-300 md:font-medium text-sm md:text-lg">
+              &copy; {currentYear} PunarBay. All rights reserved.
+            </p>
+          </div>
+          <div className=" flex items-center gap-2">
+            <div className=" rounded-md p-2 bg-[#1575B9]">
+              <Facebook />
+            </div>
+            <div className=" rounded-md p-2 bg-[#1575B9]">
+              <Youtube />
+            </div>
+            <div className=" rounded-md p-2 bg-[#1575B9]">
+              <InstagramIcon />
+            </div>
+            <div className=" rounded-md p-2 bg-[#1575B9]">
+              <TwitterIcon />
+            </div>
           </div>
         </div>
       </PBContainer>
