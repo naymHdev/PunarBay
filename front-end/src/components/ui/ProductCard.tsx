@@ -40,14 +40,14 @@ const ProductCard = ({ product }: { product: TLIsting }) => {
       <Card className="relative max-w-3xl mb-6 bg-white border-none mx-auto shadow-md rounded-lg overflow-hidden">
         <CardContent className="flex flex-col md:flex-row gap-5">
           {/* Image Section */}
-          <div className="w-full md:w-1/3 flex items-center justify-center">
+          <div className="w-full h-52 md:w-1/3 flex items-center justify-center">
             <Link href={`/listings/${product._id}`}>
               <Image
                 src={product.images[0]}
                 alt="Product Image"
                 width={250}
                 height={250}
-                className="w-full h-auto max-w-[250px] object-cover rounded-lg"
+                className="w-full h-52 max-w-[250px] object-contain rounded-lg"
               />
             </Link>
           </div>

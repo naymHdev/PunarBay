@@ -116,3 +116,26 @@ export const updateListingProduct = async (
     return Error(error);
   }
 };
+
+export const changeListingStatus = async (
+  id: string,
+  status: string
+): Promise<any> => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/listings/${id}/status`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({ status }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: (await cookies()).get("accessToken")!.value,
+        },
+      }
+    );
+    revalidateTag("LISTING");
+    return res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};

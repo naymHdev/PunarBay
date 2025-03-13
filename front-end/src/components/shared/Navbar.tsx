@@ -160,7 +160,7 @@ const Navbar = () => {
                     <Heart className="text-[#1575B9] size-8" />
                   </Button>
                   {wishlist && wishlist?.length > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 bg-white border border-[#1575B9] text-[#1575B9] text-xs font-medium h-5 w-5 flex items-center justify-center rounded-full">
+                    <span className="absolute -top-1.5 -right-1.5 text-white bg-[#1575B9]  text-xs font-medium h-5 w-5 flex items-center justify-center rounded-full">
                       {wishlist?.length}
                     </span>
                   )}

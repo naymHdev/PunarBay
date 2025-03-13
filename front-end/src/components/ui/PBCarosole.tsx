@@ -30,14 +30,14 @@ const PBCarosole = ({ images }: { images: string[] }) => {
           {images?.map((img, idx: number) => (
             <SwiperSlide
               key={idx}
-              className="relative w-full mx-auto flex items-center justify-center"
+              className="relative w-full h-56 mx-auto flex items-center justify-center"
             >
               <Image
                 src={img}
                 alt={`Product Image ${idx + 1}`}
                 height={500}
                 width={500}
-                className="object-cover object-center rounded-lg"
+                className=" object-contain h-56 object-center rounded-lg"
               />
             </SwiperSlide>
           ))}

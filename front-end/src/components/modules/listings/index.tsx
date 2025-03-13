@@ -10,6 +10,7 @@ import { Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
+import StatusModal from "./StatusModal";
 
 type TListingsProps = {
   allListings: TLIsting[];
@@ -97,9 +98,9 @@ const ManageListings = ({ allListings }: TListingsProps) => {
                     <p className=" text-sm font-2nd">{description}</p>
                     <p className="">{currencyFormatter(price)}</p>
                   </div>
-                  <div className=" mt-8 flex items-center">
+                  <div className=" mt-5 flex items-center">
                     {categories?.name && (
-                      <div className="font-medium border-r px-4">
+                      <div className="font-medium border-r pr-4">
                         Categorie: {categories?.name}
                       </div>
                     )}
@@ -153,6 +154,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
                         Update
                       </Button>
                     </Link>
+                    <StatusModal id={_id} />
                   </div>
                 </div>
                 <div>
@@ -161,7 +163,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
                     width={200}
                     height={200}
                     alt="product image"
-                    className="w-full h-auto max-w-[200px] rounded-sm object-cover"
+                    className="w-full h-52 max-w-[200px] rounded-sm object-contain"
                   />
                 </div>
               </div>
