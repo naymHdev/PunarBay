@@ -1,4 +1,5 @@
 import FeaturedCategories from "@/components/modules/home";
+import BannerSection from "@/components/modules/home/Banner";
 import HowItWorksSection from "@/components/modules/home/HowItWorks";
 import MostPopularProducts from "@/components/modules/home/MostPopularProducts";
 import ShopSellWithConfidence from "@/components/modules/home/ShopSellWithConfidence";
@@ -15,8 +16,9 @@ const HomePage = async () => {
   return (
     <>
       <div className="">
-        <MostPopularProducts data={allListings} />
+        <BannerSection />
         <FeaturedCategories />
+        <MostPopularProducts data={allListings} />
         <HowItWorksSection />
         <ShopSellWithConfidence />
       </div>
