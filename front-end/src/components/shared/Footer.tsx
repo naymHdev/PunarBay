@@ -49,7 +49,7 @@ const Footer = () => {
           <div>
             <h3 className="text-2xl font-bold mb-4">About Us</h3>
             <ul className="space-y-2">
-              <li>About Revibe</li>
+              <li>About PunarBay</li>
               <li>Shop</li>
               <li>Our Blog</li>
               <li>Become A Seller</li>
