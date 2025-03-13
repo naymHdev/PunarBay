@@ -4,6 +4,7 @@ import { IImageFiles } from '../../interface/IImageFile';
 import { ConditionType, IListing } from './listing.interface';
 import { Listing } from './listing.model';
 import QueryBuilder from '../../builder/QueryBuilder';
+import { Types } from 'mongoose';
 
 const createListingIntoDB = async (
   productData: Partial<IListing>,
@@ -140,10 +141,23 @@ const updateListing = async (
   return await Listing.findByIdAndUpdate(id, payload, { new: true });
 };
 
+const changeListingStatus = async (id: string, status: string) => {
+  const result = await Listing.findOneAndUpdate(
+    {
+      _id: new Types.ObjectId(id),
+    },
+    { status },
+    { new: true },
+  );
+
+  return result;
+};
+
 export const ListingServices = {
   createListingIntoDB,
   getALlListingsFromDB,
   getSingleListingFromDB,
   deleteListingFromDB,
   updateListing,
+  changeListingStatus,
 };

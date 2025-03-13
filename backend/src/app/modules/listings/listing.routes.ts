@@ -32,4 +32,10 @@ router.put(
   ListingControllers.updateListing,
 );
 
+router.patch(
+  '/:id/status',
+  auth(UserRole.USER),
+  ListingControllers.updateStatus,
+);
+
 export const ListingRoutes = router;

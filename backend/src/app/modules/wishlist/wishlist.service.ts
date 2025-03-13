@@ -10,41 +10,58 @@ const addToWishlist = async (
   authUser: IJwtPayload,
 ) => {
   try {
-    if (wishlistData.products) {
-      for (const productItem of wishlistData.products) {
-        const product = await Listing.findById(productItem.product);
+    if (!wishlistData.products || wishlistData.products.length === 0) {
+      throw new AppError(
+        StatusCodes.NOT_FOUND,
+        'No products provided to add to wishlist.',
+      );
+    }
 
-        const isExists = await Wishlist.findOne({
-          user: authUser._id,
-          'products.product': productItem.product,
-        });
+    const userWishlist = await Wishlist.findOne({ user: authUser._id });
 
-        if (isExists) {
-          throw new Error('You already added this product to your wishlist!');
-        }
+    for (const productItem of wishlistData.products) {
+      const product = await Listing.findById(productItem.product);
 
-        if (product) {
-          if (product.status === 'sold') {
-            throw new Error(`Product ${product?.title} is soldout.`);
-          }
-        } else {
-          throw new Error(`Product not found: ${productItem.product}`);
-        }
+      if (!product) {
+        throw new AppError(
+          StatusCodes.NOT_FOUND,
+          `Product not found: ${productItem.product}`,
+        );
+      }
 
-        await product.save();
+      if (product.status === 'sold') {
+        throw new Error(`Product ${product?.title} is sold out.`);
+      }
+
+      // Check if product already exists in wishlist
+      const isExists = userWishlist?.products.some(
+        (p) => p.product.toString() === productItem.product.toString(),
+      );
+
+      if (isExists) {
+        throw new AppError(
+          StatusCodes.NOT_ACCEPTABLE,
+          'You already added this product to your wishlist!',
+        );
       }
     }
 
-    const createWishlist = new Wishlist({
-      ...wishlistData,
-      user: authUser._id,
-    });
-
-    const result = await createWishlist.save();
-
-    return result;
+    if (userWishlist) {
+      // Update existing wishlist and push new products
+      userWishlist.products.push(...wishlistData.products);
+      await userWishlist.save();
+      return userWishlist;
+    } else {
+      // Create a new wishlist if it doesn't exist
+      const createWishlist = new Wishlist({
+        user: authUser._id,
+        products: wishlistData.products,
+      });
+      const result = await createWishlist.save();
+      return result;
+    }
   } catch (error: any) {
-    throw new AppError(StatusCodes.NOT_FOUND, error);
+    throw new AppError(StatusCodes.NOT_FOUND, error.message);
   }
 };
 
