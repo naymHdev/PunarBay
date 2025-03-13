@@ -45,9 +45,6 @@ const Navbar = () => {
                 <Link className=" ml-8 text-md font-medium" href="/listings">
                   About
                 </Link>
-                <Link className=" ml-8 text-md font-medium" href="/listings">
-                  Contact
-                </Link>
               </div>
             </div>
 

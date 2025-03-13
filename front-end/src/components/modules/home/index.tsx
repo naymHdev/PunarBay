@@ -11,7 +11,7 @@ const FeaturedCategories = async () => {
 
   return (
     <>
-      <div className=" mt-5">
+      <div className="mt-4 md:mt-10">
         <PBContainer maxWidth="7xl">
           <div className="flex items-center justify-between">
             <h2 className=" text-lg font-semibold">Top Selling Categories</h2>
@@ -21,7 +21,7 @@ const FeaturedCategories = async () => {
               </PBButton>
             </Link>
           </div>
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-5">
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-5">
             {categories?.map((category: TCategory, idx: number) => (
               <CategoryCard key={idx} category={category} />
             ))}

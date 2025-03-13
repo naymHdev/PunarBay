@@ -10,7 +10,7 @@ const HowItWorksSection = () => {
       <div className="mt-4 md:mt-10">
         <PBContainer maxWidth="7xl">
           <h2 className="text-lg font-semibold">How It Works</h2>
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-5">
             <div>
               <div>
                 <Image src={list} alt="List It" width={400} height={600} />
