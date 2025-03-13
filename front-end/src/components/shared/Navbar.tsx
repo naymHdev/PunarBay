@@ -6,13 +6,6 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import PBButton from "../ui/PBButton";
-import {
-  DropdownMenuLabel,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-} from "../ui/dropdown-menu";
 import { useUser } from "@/contexts/UserContext";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -46,29 +39,20 @@ const Navbar = () => {
                 </div>
               </Link>
               <div>
-                <Link className=" ml-8 text-2xl font-medium" href="/listings">
+                <Link className=" ml-8 text-md font-medium" href="/listings">
                   All Ads
+                </Link>
+                <Link className=" ml-8 text-md font-medium" href="/listings">
+                  About
+                </Link>
+                <Link className=" ml-8 text-md font-medium" href="/listings">
+                  Contact
                 </Link>
               </div>
             </div>
 
             {/* Search and Dropdown */}
             <div className="flex justify-center sm:justify-center gap-4">
-              <div className="flex gap-2 items-center">
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="flex items-center">
-                    BD
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="border-none shadow-md">
-                    <DropdownMenuLabel>Type Your City Name</DropdownMenuLabel>
-                    <DropdownMenuSeparator className="border border-neutral-300" />
-                    <DropdownMenuLabel>Dhaka</DropdownMenuLabel>
-                    <DropdownMenuLabel>Panchagarh</DropdownMenuLabel>
-                    <DropdownMenuLabel>Rajsahi</DropdownMenuLabel>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-
               <div className="flex w-full items-center border border-[#1575B9] rounded">
                 <Input
                   onChange={(e) =>
