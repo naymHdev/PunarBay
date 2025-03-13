@@ -1,15 +1,22 @@
 import FeaturedCategories from "@/components/modules/home";
+import HowItWorksSection from "@/components/modules/home/HowItWorks";
 import MostPopularProducts from "@/components/modules/home/MostPopularProducts";
 import { getAllListings } from "@/services/listings";
+import { TLIsting } from "@/types/listings";
 
 const HomePage = async () => {
-  const { data } = await getAllListings();
+  const { data: allListings } = await getAllListings();
+
+  const availableProduct = allListings.filter(
+    (itm: TLIsting) => itm.status === "available" && itm.userID !== null
+  );
 
   return (
     <>
-      <div className=" space-y-6">
-        <MostPopularProducts data={data} />
+      <div className="">
+        <MostPopularProducts data={allListings} />
         <FeaturedCategories />
+        <HowItWorksSection />
       </div>
     </>
   );

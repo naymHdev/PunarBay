@@ -18,7 +18,7 @@ const MostPopularProducts = ({ data }: { data: TLIsting[] }) => {
     <>
       <PBContainer maxWidth="7xl">
         <div className="mt-5">
-          <h2 className=" text-lg font-semibold">Most Popular Products</h2>
+          <h2 className=" text-lg font-semibold">Most Popular Ads</h2>
           <div className="mt-4">
             <Carousel className="w-full max-w-7xl mx-auto">
               <CarouselContent>
@@ -31,7 +31,7 @@ const MostPopularProducts = ({ data }: { data: TLIsting[] }) => {
                       className="pl-1 basis-1/2 sm:basis-1/3 md:basis-1/5 lg:basis-1/6"
                     >
                       <div className="p-2">
-                        <Card className="bg-white border-neutral-300 rounded-lg shadow-none">
+                        <Card className="bg-white border-neutral-200 rounded-2xl shadow-none">
                           <CardContent className="flex flex-col aspect-square items-center justify-center ">
                             <div className="relative w-full h-[8rem]">
                               <Image
@@ -54,8 +54,8 @@ const MostPopularProducts = ({ data }: { data: TLIsting[] }) => {
                     </CarouselItem>
                   ))}
               </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
+              <CarouselPrevious className=" border-neutral-400" />
+              <CarouselNext className=" border-neutral-400" />
             </Carousel>
           </div>
         </div>

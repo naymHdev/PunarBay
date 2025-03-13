@@ -11,17 +11,17 @@ const FeaturedCategories = async () => {
 
   return (
     <>
-      <div className=" mt-10">
+      <div className=" mt-5">
         <PBContainer maxWidth="7xl">
-          <div className="max-w-5xl mx-auto flex items-center justify-between">
-            <h2 className=" text-lg font-semibold">Top Selling Category</h2>
+          <div className="flex items-center justify-between">
+            <h2 className=" text-lg font-semibold">Top Selling Categories</h2>
             <Link href="/listings">
               <PBButton>
                 View All <ArrowRight />
               </PBButton>
             </Link>
           </div>
-          <div className="mt-4 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-4">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-5">
             {categories?.map((category: TCategory, idx: number) => (
               <CategoryCard key={idx} category={category} />
             ))}
