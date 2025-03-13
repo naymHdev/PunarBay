@@ -41,11 +41,12 @@ const LoginForm = () => {
       const res = await loginUser(data);
       // console.log("login__res", res);
       if (res?.success) {
+        window.location.reload();
         toast.error(res?.message);
         if (redirect) {
           router.push(redirect);
         } else {
-          router.push("/");
+          router.push("/user/my-account");
         }
       } else {
         toast.error(res?.message);

@@ -40,7 +40,8 @@ const RegisterForm = () => {
       // console.log("res--------->", res);
       if (res?.success) {
         toast.error(res?.message);
-        router.push("/");
+        window.location.reload();
+        router.push("/user/my-account");
       } else {
         toast.error(res?.message);
       }
