@@ -34,6 +34,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { updateProfile } from "@/services/users";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { bdDivisions } from "../../listings/filterSidebar";
 
 const UpdateAddressForm = () => {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
@@ -46,11 +47,11 @@ const UpdateAddressForm = () => {
       name: "Naym Hossen",
       profileImage: "",
       address: {
-        street: "123 Main St",
-        city: "New York",
+        street: "Housing Socity, Road-11",
+        city: "",
         state: "NY",
-        postalCode: "10001",
-        country: "USA",
+        postalCode: "1207",
+        country: "Bangladesh",
       },
       phoneNo: "01770064053",
       gender: "Male",
@@ -63,7 +64,7 @@ const UpdateAddressForm = () => {
   } = form;
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    // console.log("modifiedData__", data);
+    // console.log("modifiedData__", data.address);
 
     if (!user?._id) {
       toast.error("User ID is missing!");
@@ -77,9 +78,11 @@ const UpdateAddressForm = () => {
       formData.append("profileImage", imageFiles[0] as File);
     }
 
+    // console.log("modifiedData__", formData);
+
     try {
       const res = await updateProfile(user?._id!, formData);
-      // console.log("update Profile", res);
+      // console.log("update Profile", res.data.address);
 
       if (res.success) {
         toast.success(res.message);
@@ -160,19 +163,33 @@ const UpdateAddressForm = () => {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="address.city"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Your City</FormLabel>
-                    <FormControl>
-                      <Input {...field} value={field.value || ""} />
-                    </FormControl>
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Your City" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className=" bg-gray-100">
+                        {bdDivisions?.map((place, index) => (
+                          <SelectItem key={index} value={place}>
+                            {place}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="address.state"

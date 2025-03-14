@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const bdDivisions = [
+export const bdDivisions = [
   "Barisal",
   "Chattogram",
   "Dhaka",
@@ -170,11 +170,7 @@ export default function FilterSidebar() {
           <SelectContent className=" bg-gray-100 border-neutral-300">
             {bdDivisions?.map((place, index) => (
               <div key={index} className="flex items-center space-x-2">
-                <SelectItem
-                  onClick={() => handleSearchQuery("location", place)}
-                  value={place}
-                  id={place}
-                >
+                <SelectItem key={index} value={place}>
                   {place}
                 </SelectItem>
               </div>
