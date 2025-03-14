@@ -41,9 +41,11 @@ const Footer = () => {
               PunarBay Technology FZ-LLC is a registered company, licensed by
               Bangladesh Development Authority.
             </p>
-            <PBButton className="mt-10">
-              Post Free Ad <Plus />
-            </PBButton>
+            <Link href="/user/post-ad">
+              <PBButton className="mt-10">
+                Post Free Ad <Plus />
+              </PBButton>
+            </Link>
           </div>
 
           <div>

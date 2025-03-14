@@ -45,10 +45,10 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props} className=" border-none bg-white">
-      <SidebarHeader>
+      <SidebarHeader className="bg-white">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
+            <SidebarMenuButton className="bg-white" size="lg" asChild>
               <Link href="/">
                 <div className="flex items-center justify-center"></div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -59,10 +59,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="bg-white">
         <NavMain items={data.navMain} />
       </SidebarContent>
-      <SidebarFooter className="pb-10">
+      <SidebarFooter className="pb-10 bg-white">
         <NavUser />
       </SidebarFooter>
     </Sidebar>

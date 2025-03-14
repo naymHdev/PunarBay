@@ -20,7 +20,7 @@ const HomePage = async () => {
         <BannerSection />
         <FeaturedCategories />
         <HighlightCategory />
-        <MostPopularProducts data={allListings} />
+        <MostPopularProducts data={availableProduct} />
         <HowItWorksSection />
         <ShopSellWithConfidence />
       </div>

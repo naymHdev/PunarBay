@@ -43,7 +43,7 @@ const MostPopularProducts = ({ data }: { data: TLIsting[] }) => {
                                 />
                               </div>
                               <Link href={`/listings/${product._id}`}>
-                                <h2 className="mt-2 text-sm font-medium text-center text-gray-800">
+                                <h2 className="mt-2 text-md font-medium text-center text-gray-800">
                                   {product.title.length > 30
                                     ? product.title.slice(0, 30) + "..."
                                     : product.title}

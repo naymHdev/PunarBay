@@ -36,7 +36,7 @@ const ListingsPage = async ({
               <FilterSidebar />
             </div>
             <div className="">
-              {availableProduct.length > 0 ? (
+              {availableProduct?.length > 0 ? (
                 availableProduct
                   .slice()
                   .reverse()

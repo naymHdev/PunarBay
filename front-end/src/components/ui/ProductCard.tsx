@@ -17,7 +17,7 @@ const ProductCard = ({ product }: { product: TLIsting }) => {
     addSuffix: true,
   });
 
-  console.log("product", product?.userID);
+  // console.log("product", product?.userID);
 
   const handleWishlist = async (product: TLIsting) => {
     const wishlistProduct: TWishlist = {

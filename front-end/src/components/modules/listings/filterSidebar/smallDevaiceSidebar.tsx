@@ -10,6 +10,14 @@ import { getAllCategories } from "@/services/category";
 import { Slider } from "@/components/ui/slider";
 import styles from "./filterSidebar.module.css";
 import { Filter } from "lucide-react";
+import { bdDivisions } from ".";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function FilterSidebar() {
   const [price, setPrice] = useState([0]);
@@ -169,6 +177,27 @@ export default function FilterSidebar() {
                 ))}
               </RadioGroup>
             )}
+          </div>
+
+          {/* Product Divisions */}
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold mb-4">Product Location</h2>
+            <Select
+              onValueChange={(value) => handleSearchQuery("location", value)}
+            >
+              <SelectTrigger className=" w-full border-neutral-300">
+                <SelectValue placeholder="Select Location" />
+              </SelectTrigger>
+              <SelectContent className=" bg-gray-100 border-neutral-300">
+                {bdDivisions?.map((place, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    <SelectItem key={index} value={place}>
+                      {place}
+                    </SelectItem>
+                  </div>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </div>
       </div>
