@@ -37,7 +37,7 @@ const PBCarosole = ({ images }: { images: string[] }) => {
                 alt={`Product Image ${idx + 1}`}
                 height={500}
                 width={500}
-                className=" object-contain h-56 object-center rounded-lg"
+                className=" object-contain h-[20rem] object-center rounded-lg"
               />
             </SwiperSlide>
           ))}
@@ -53,13 +53,13 @@ const PBCarosole = ({ images }: { images: string[] }) => {
           className="mySwiper mt-5"
         >
           {images?.map((img, idx: number) => (
-            <SwiperSlide key={idx}>
+            <SwiperSlide key={idx} className="">
               <Image
                 src={img}
                 alt={`Product Image ${idx + 1}`}
                 height={100}
                 width={100}
-                className="object-cover rounded-lg"
+                className="object-contain h-20 rounded-lg"
               />
             </SwiperSlide>
           ))}

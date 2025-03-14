@@ -50,11 +50,11 @@ const Footer = () => {
 
           <div>
             <h3 className="text-2xl font-bold mb-4">About Us</h3>
-            <ul className="space-y-2">
-              <li>About PunarBay</li>
-              <li>Shop</li>
-              <li>Our Blog</li>
-              <li>Become A Seller</li>
+            <ul className=" flex flex-col space-y-2">
+              <Link href="#">About PunarBay</Link>
+              <Link href="/listings">Shop</Link>
+              <Link href="#">Our Blog</Link>
+              <Link href="#">Become A Seller</Link>
             </ul>
           </div>
 

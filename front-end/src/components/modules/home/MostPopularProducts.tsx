@@ -29,11 +29,11 @@ const MostPopularProducts = ({ data }: { data: TLIsting[] }) => {
                     ?.map((product) => (
                       <CarouselItem
                         key={product._id}
-                        className="pl-1 basis-1/2 sm:basis-1/3 md:basis-1/5"
+                        className="pl-1 basis-1/1 md:basis-1/4"
                       >
                         <div className="p-2">
                           <Card className="bg-white border-neutral-200 rounded-2xl shadow-none">
-                            <CardContent className="flex flex-col aspect-square items-center justify-center ">
+                            <CardContent className="flex flex-col aspect-square items-center justify-evenly ">
                               <div className="relative w-full h-[8rem]">
                                 <Image
                                   src={product.images[0]}

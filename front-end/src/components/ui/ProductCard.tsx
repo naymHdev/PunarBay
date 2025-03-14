@@ -56,7 +56,7 @@ const ProductCard = ({ product }: { product: TLIsting }) => {
 
           {/* Content Section */}
           <div className="w-full md:w-2/3 flex flex-col justify-between">
-            <div className="space-y-4">
+            <div className="space-y-2">
               <div className=" flex items-center justify-between">
                 <Link href={`/listings/${product._id}`}>
                   <h2 className="text-xl font-semibold text-[#1575B9]">

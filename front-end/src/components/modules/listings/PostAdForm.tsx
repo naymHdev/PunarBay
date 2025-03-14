@@ -48,12 +48,12 @@ const PostAdForm = () => {
 
   const form = useForm({
     defaultValues: {
-      title: "",
-      description: "",
-      price: "",
-      categories: "",
-      condition: "",
-      location: "",
+      title: "Wooden Dining Table",
+      description: "Solid wood dining table with six chairs.",
+      price: "15000",
+      categories: "Furniture & Home Decor",
+      condition: "Used",
+      location: "Dhaka",
     },
   });
 
@@ -125,7 +125,7 @@ const PostAdForm = () => {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="mt-5 border-2 border-gray-300 rounded-xl flex-grow max-w-2xl p-5">
+          <div className="mt-5 border-2 border-gray-300 bg-white mb-10 rounded-xl flex-grow max-w-2xl p-5">
             <div className="grid grid-cols-1 gap-4">
               <FormField
                 control={form.control}
