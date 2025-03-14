@@ -72,7 +72,7 @@ const deleteCategoryIntoDB = async (id: string, authUser: IJwtPayload) => {
 
   if (
     authUser.role === UserRole.USER &&
-    isBrandExist.createdBy.toString() !== authUser.userId
+    isBrandExist.createdBy.toString() !== authUser._id
   ) {
     throw new AppError(
       StatusCodes.BAD_REQUEST,

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import cookieParser from 'cookie-parser';
@@ -6,8 +7,6 @@ import { StatusCodes } from 'http-status-codes';
 import globalErrorHandler from './app/middleware/globalErrorHandler';
 import notFound from './app/middleware/notFound';
 import router from './app/routes';
-// import seedAdmin from './app/DB/seed';
-// import { sslService } from './app/modules/sslcommerz/sslcommerz.service';
 
 const app: Application = express();
 
@@ -17,11 +16,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/v1", router);
-
-// seedAdmin();
+app.use('/api/v1', router);
 
 // Test route
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
   const currentDateTime = new Date().toISOString();
   const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
@@ -56,4 +54,4 @@ app.use(globalErrorHandler);
 //Not Found
 app.use(notFound);
 
-export default app; // Export the app for use in server.ts
+export default app;
