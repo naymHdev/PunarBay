@@ -1,4 +1,5 @@
 import FilterSidebar from "@/components/modules/listings/filterSidebar";
+import SmallDeviceSidebar from "@/components/modules/listings/filterSidebar/smallDevaiceSidebar";
 import PBContainer from "@/components/ui/PBContainer";
 import ProductCard from "@/components/ui/ProductCard";
 import { getAllListings } from "@/services/listings";
@@ -26,8 +27,11 @@ const ListingsPage = async ({
     <>
       <div className=" mt-10">
         <PBContainer>
+          <div className="w-full block md:hidden">
+            <SmallDeviceSidebar />
+          </div>
           <div className=" flex gap-8">
-            <div className=" w-full max-w-[20rem]">
+            <div className=" hidden md:block w-full max-w-[20rem]">
               <FilterSidebar />
             </div>
             <div className="">

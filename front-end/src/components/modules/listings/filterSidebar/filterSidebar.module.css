@@ -20,3 +20,31 @@
   height: 4px;
   border-radius: 4px;
 }
+
+/* Sliding sidebar effect */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Add the sliding animation to the sidebar */
+.sidebar {
+  animation: slideIn 0.3s ease-out;
+}
+
+.sidebar.hidden {
+  animation: slideOut 0.3s ease-in;
+}

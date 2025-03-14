@@ -38,7 +38,7 @@ const ProductCard = ({ product }: { product: TLIsting }) => {
   return (
     <>
       <Card className="relative max-w-3xl mb-6 bg-white border-none mx-auto shadow-md rounded-lg overflow-hidden">
-        <CardContent className="flex flex-col md:flex-row gap-5">
+        <CardContent className="flex gap-5">
           {/* Image Section */}
           <div className="w-full h-52 md:w-1/3 flex items-center justify-center">
             <Link href={`/listings/${product._id}`}>

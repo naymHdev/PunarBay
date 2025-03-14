@@ -74,14 +74,11 @@ const Navbar = () => {
                   <h2 className=" font-black text-[#1575B9]">Punar</h2>Bay
                 </div>
               </Link>
-              <div>
+              {/* <div>
                 <Link className=" ml-8 text-md font-medium" href="/listings">
                   Products
                 </Link>
-                <Link className=" ml-8 text-md font-medium" href="/listings">
-                  About
-                </Link>
-              </div>
+              </div> */}
             </div>
 
             {/* Search and Dropdown */}
