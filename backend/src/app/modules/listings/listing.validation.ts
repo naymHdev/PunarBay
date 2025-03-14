@@ -12,6 +12,7 @@ const listingValidationSchema = z.object({
     price: z.number().min(0, 'Price must be a positive number'),
     condition: z.enum(['new', 'used', 'refurbished']),
     userID: z.string({ required_error: 'Invalid User ID' }),
+    location: z.string().optional(),
     status: z.enum(['available', 'sold']).default('available'),
     categories: z
       .string({
@@ -35,6 +36,7 @@ const listingUpdateValidationSchema = z.object({
     price: z.number().min(0, 'Price must be a positive number').optional(),
     condition: z.enum(['new', 'used', 'refurbished']).optional(),
     userID: z.string({ required_error: 'Invalid User ID' }).optional(),
+    location: z.string().optional(),
     status: z.enum(['available', 'sold']).default('available').optional(),
   }),
 });

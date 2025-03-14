@@ -10,5 +10,6 @@ export interface IListing extends Document {
   condition: ConditionType;
   images: string[];
   userID: Types.ObjectId;
+  location?: string;
   status: 'available' | 'sold';
 }

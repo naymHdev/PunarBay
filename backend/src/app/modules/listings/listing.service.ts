@@ -25,8 +25,15 @@ const createListingIntoDB = async (
 };
 
 const getALlListingsFromDB = async (query: Record<string, unknown>) => {
-  const { minPrice, maxPrice, categories, brands, condition, ...pQuery } =
-    query;
+  const {
+    minPrice,
+    maxPrice,
+    categories,
+    brands,
+    location,
+    condition,
+    ...pQuery
+  } = query;
 
   // Build the filter object
   const filter: Record<string, any> = {};
@@ -41,6 +48,17 @@ const getALlListingsFromDB = async (query: Record<string, unknown>) => {
           : [categories];
 
     filter.categories = { $in: categoryArray };
+  }
+
+  if (location) {
+    const locationArray =
+      typeof location === 'string'
+        ? location.split(',')
+        : Array.isArray(location)
+          ? location
+          : [location];
+
+    filter.location = { $in: locationArray };
   }
 
   if (brands) {

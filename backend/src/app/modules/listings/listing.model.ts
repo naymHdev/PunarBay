@@ -25,6 +25,9 @@ const ListingSchema = new Schema<IListing>(
       ref: 'User',
       required: [true, 'Login first than post your ad!'],
     },
+    location: {
+      type: String,
+    },
     status: {
       type: String,
       enum: ['available', 'sold'],
