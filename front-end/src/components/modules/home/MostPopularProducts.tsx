@@ -21,7 +21,7 @@ const MostPopularProducts = ({ data }: { data: TLIsting[] }) => {
           <div>
             <h2 className=" text-lg font-semibold">Most Popular Ads</h2>
             <div className="mt-5">
-              <Carousel className="w-full max-w-7xl mx-auto">
+              <Carousel className=" w-10/12 max-w-6xl mx-auto">
                 <CarouselContent>
                   {data
                     ?.slice()
@@ -29,7 +29,7 @@ const MostPopularProducts = ({ data }: { data: TLIsting[] }) => {
                     ?.map((product) => (
                       <CarouselItem
                         key={product._id}
-                        className="pl-1 basis-1/2 sm:basis-1/3 md:basis-1/5 lg:basis-1/6"
+                        className="pl-1 basis-1/2 sm:basis-1/3 md:basis-1/5"
                       >
                         <div className="p-2">
                           <Card className="bg-white border-neutral-200 rounded-2xl shadow-none">

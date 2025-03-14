@@ -10,7 +10,7 @@ const HighlightCategory = () => {
   return (
     <div className="mt-4 md:mt-10">
       <PBContainer maxWidth="7xl">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-center justify-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 items-center justify-center">
           {slides.map((slide, index) => (
             <div key={index} className="relative w-full h-64 md:h-80 lg:h-96 rounded-2xl">
               <Image
