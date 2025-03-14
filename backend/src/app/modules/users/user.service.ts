@@ -3,6 +3,7 @@ import { IJwtPayload, IUser } from '../auth/auth.interface';
 import User from '../auth/auth.model';
 import AppError from '../../errors/appError';
 import { IImageFile } from '../../interface/IImageFile';
+import { Document } from 'mongoose';
 
 const myProfile = async (authUser: IJwtPayload) => {
   //   console.log('authUser', authUser);
@@ -42,8 +43,10 @@ const updateProfile = async (
 
   // Merge existing address with new address data
   if (payload.address) {
+    const existingAddress =
+      (isUserExists.address as unknown as Document)?.toObject() || {};
     payload.address = {
-      ...isUserExists.address,
+      ...existingAddress,
       ...payload.address,
     };
   }
@@ -51,7 +54,7 @@ const updateProfile = async (
   const result = await User.findOneAndUpdate(
     { _id: authUser._id },
     { $set: payload },
-    { new: true },
+    { new: true, runValidators: true },
   );
 
   return result;
