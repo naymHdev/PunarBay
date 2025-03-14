@@ -11,7 +11,12 @@ import router from './app/routes';
 const app: Application = express();
 
 // Middleware setup
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(
+  cors({
+    origin: ['http://localhost:3000', 'https://punarbay.vercel.app'],
+  }),
+);
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
