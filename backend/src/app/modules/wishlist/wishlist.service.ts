@@ -17,6 +17,13 @@ const addToWishlist = async (
       );
     }
 
+    if (!authUser._id) {
+      throw new AppError(
+        StatusCodes.NOT_FOUND,
+        'Login first than added your wishlist',
+      );
+    }
+
     const userWishlist = await Wishlist.findOne({ user: authUser._id });
 
     for (const productItem of wishlistData.products) {
