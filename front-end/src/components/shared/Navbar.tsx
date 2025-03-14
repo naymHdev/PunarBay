@@ -19,7 +19,7 @@ const Navbar = () => {
   const [isUser, setIsUser] = useState<IUser | null>(null);
   const [wishlist, setWishlist] = useState<TLIsting[] | null>(null);
   const { user } = useUser();
-  // console.log("user", user?._id);
+  // console.log("isUser", isUser);
 
   const router = useRouter();
   const pathname = usePathname();

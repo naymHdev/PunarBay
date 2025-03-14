@@ -9,6 +9,24 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getAllCategories } from "@/services/category";
 import { Slider } from "@/components/ui/slider";
 import styles from "./filterSidebar.module.css";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const bdDivisions = [
+  "Barisal",
+  "Chattogram",
+  "Dhaka",
+  "Khulna",
+  "Mymensingh",
+  "Rajshahi",
+  "Rangpur",
+  "Sylhet",
+];
 
 export default function FilterSidebar() {
   const [price, setPrice] = useState([0]);
@@ -40,11 +58,9 @@ export default function FilterSidebar() {
 
   const handleSearchQuery = (query: string, value: string | number) => {
     const params = new URLSearchParams(searchParams.toString());
-
     // console.log("params", params);
 
     params.set(query, value.toString());
-
     router.push(`${pathname}?${params.toString()}`, {
       scroll: false,
     });
@@ -68,8 +84,8 @@ export default function FilterSidebar() {
           </Button>
         )}
       </div>
-      {/* Filter by Price */}
 
+      {/* Filter by Price */}
       <div className="mb-6">
         <h2 className="text-lg font-semibold mb-4">Price</h2>
         <div className="flex items-center justify-between text-sm mb-2">
@@ -120,7 +136,7 @@ export default function FilterSidebar() {
         </RadioGroup>
       </div>
 
-      {/* Product Types */}
+      {/* Product Category */}
       <div className="mb-6">
         <h2 className="text-lg font-semibold mb-4">Product Category</h2>
         {!isLoading && (
@@ -142,6 +158,29 @@ export default function FilterSidebar() {
             ))}
           </RadioGroup>
         )}
+      </div>
+
+      {/* Product Divisions */}
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold mb-4">Product Location</h2>
+        <Select onValueChange={(value) => handleSearchQuery("location", value)}>
+          <SelectTrigger className=" w-full border-neutral-300">
+            <SelectValue placeholder="Select Location" />
+          </SelectTrigger>
+          <SelectContent className=" bg-gray-100 border-neutral-300">
+            {bdDivisions?.map((place, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <SelectItem
+                  onClick={() => handleSearchQuery("location", place)}
+                  value={place}
+                  id={place}
+                >
+                  {place}
+                </SelectItem>
+              </div>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );

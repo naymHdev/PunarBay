@@ -13,13 +13,14 @@ const ListingsPage = async ({
   searchParams: TSearchParams;
 }) => {
   const query = await searchParams;
+
   const { data: allListings } = await getAllListings(
     undefined,
     undefined,
     query
   );
 
-  const availableProduct = allListings.filter(
+  const availableProduct = allListings?.filter(
     (itm: TLIsting) => itm.status === "available" && itm.userID !== null
   );
 

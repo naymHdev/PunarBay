@@ -28,6 +28,8 @@ import { addListig } from "@/services/listings";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/contexts/UserContext";
+import { IUser } from "@/types/user";
+import { getMyProfile } from "@/services/users";
 
 export type TPostAddFormProps = {
   category: TCategory[];
@@ -37,9 +39,11 @@ const PostAdForm = () => {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
   const [categories, setCategories] = useState<TCategory[] | []>([]);
-
+  const [isUser, setIsUser] = useState<IUser | null>(null);
   const { user } = useUser();
-  // console.log("userId__", user);
+
+  // console.log("isUser__", isUser?.address?.city);
+
   const router = useRouter();
 
   const form = useForm({
@@ -49,6 +53,7 @@ const PostAdForm = () => {
       price: "",
       categories: "",
       condition: "",
+      location: "",
     },
   });
 
@@ -66,11 +71,27 @@ const PostAdForm = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (!user?._id) return;
+
+    const fetchData = async () => {
+      try {
+        const userData = await getMyProfile(user?._id);
+        setIsUser(userData.data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
+    fetchData();
+  }, [user?._id]);
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const modifiedData = {
       ...data,
       price: parseFloat(data.price),
       userID: user?._id,
+      location: isUser?.address?.city || "Dhaka",
     };
 
     // console.log("modifiedData__", modifiedData);

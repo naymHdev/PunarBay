@@ -28,6 +28,7 @@ export type TLIsting = {
   images: string[];
   categories: TCategory;
   userID: TUser;
+  location?: string;
   status: "available" | "sold";
   createdAt: string;
   updatedAt: string;

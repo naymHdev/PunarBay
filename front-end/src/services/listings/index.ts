@@ -28,7 +28,7 @@ export const getAllListings = async (
   const params = new URLSearchParams();
 
   if (query?.price) {
-    params.append("maxPrice", "0");
+    params.append("minPrice", "0");
     params.append("maxPrice", query?.price.toString());
   }
 
@@ -38,6 +38,10 @@ export const getAllListings = async (
 
   if (query?.condition) {
     params.append("condition", query?.condition.toString());
+  }
+
+  if (query?.location) {
+    params.append("location", query?.location.toString());
   }
 
   if (query?.searchTerm) {
