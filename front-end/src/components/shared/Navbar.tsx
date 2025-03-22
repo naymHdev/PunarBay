@@ -14,6 +14,7 @@ import { getMyProfile } from "@/services/users";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getAllWishlists } from "@/services/wishlist";
 import { TLIsting } from "@/types/listings";
+import NavSidebar from "./NavSidebar";
 
 const Navbar = () => {
   const [isUser, setIsUser] = useState<IUser | null>(null);
@@ -60,7 +61,6 @@ const Navbar = () => {
     fetchData();
   }, []);
 
-  // console.log("wishlist", wishlist);
 
   return (
     <>
@@ -68,17 +68,18 @@ const Navbar = () => {
         <PBContainer maxWidth="7xl">
           <div className="py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center justify-center gap-4">
             {/* Logo */}
-            <div className="flex items-center justify-center sm:justify-start">
+            <div className="flex items-center justify-between sm:justify-start">
               <Link href="/">
-                <div className="flex items-center text-4xl">
-                  <h2 className=" font-black text-[#1575B9]">Punar</h2>Bay
+                <div className="flex items-center text-4xl font-black">
+                  <NavSidebar />
+                  <h2 className=" text-[#1575B9]">Punar</h2>Bay
                 </div>
               </Link>
-              {/* <div>
+              <div>
                 <Link className=" ml-8 text-md font-medium" href="/listings">
                   Products
                 </Link>
-              </div> */}
+              </div>
             </div>
 
             {/* Search and Dropdown */}
@@ -141,13 +142,6 @@ const Navbar = () => {
                   </Link>
                 </div>
               )}
-
-              <Link href="/user/post-ad">
-                <PBButton>
-                  Post Free Ad <Plus />
-                </PBButton>
-              </Link>
-
               <Link href="/user/my-favourits" legacyBehavior>
                 <div className="relative inline-flex items-center justify-center">
                   <Button
@@ -162,6 +156,11 @@ const Navbar = () => {
                     </span>
                   )}
                 </div>
+              </Link>
+              <Link href="/user/post-ad">
+                <PBButton>
+                  Post Free Ad <Plus />
+                </PBButton>
               </Link>
             </div>
           </div>
