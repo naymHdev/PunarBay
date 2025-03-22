@@ -53,7 +53,7 @@ const ListingsPage = async ({
               ) : (
                 // Skeleton Loader
                 Array.from({ length: 8 }).map((_, index) => (
-                  <Skeleton key={index} className="h-60 w-full rounded-lg" />
+                  <Skeleton key={index} className="h-60 w-full rounded-lg bg-gray-300" />
                 ))
               )}
             </div>
