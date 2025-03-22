@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import PBLoading from "@/components/ui/PBLoading";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const bdDivisions = [
   "Barisal",
@@ -137,10 +138,38 @@ export default function FilterSidebar() {
         </RadioGroup>
       </div>
 
-      {/* Product Category */}
+      {/* Product Divisions */}
       <div className="mb-6">
+        <h2 className="text-lg font-semibold mb-4">Product Location</h2>
+        <Select onValueChange={(value) => handleSearchQuery("location", value)}>
+          <SelectTrigger className=" w-full border-neutral-300">
+            <SelectValue placeholder="Select Location" />
+          </SelectTrigger>
+          <SelectContent className=" bg-gray-100 border-neutral-300">
+            {bdDivisions?.map((place, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <SelectItem key={index} value={place}>
+                  {place}
+                </SelectItem>
+              </div>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Product Category */}
+      <div className="">
         <h2 className="text-lg font-semibold mb-4">Product Category</h2>
-        {isLoading ? <PBLoading /> : (
+        {isLoading ? (
+          <div className="space-y-2">
+            {[...Array(categories && categories.length > 0 ? categories.length : 5)].map((_, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <Skeleton className="w-6 h-6 rounded-full bg-gray-300" />
+                <Skeleton className="w-11/12 h-6 rounded-md bg-gray-300" />
+              </div>
+            ))}
+          </div>
+        ) : (
           <RadioGroup className="space-y-2">
             {categories?.map((category: { _id: string; name: string }) => (
               <div key={category._id} className="flex items-center space-x-2">
@@ -161,24 +190,8 @@ export default function FilterSidebar() {
         )}
       </div>
 
-      {/* Product Divisions */}
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold mb-4">Product Location</h2>
-        <Select onValueChange={(value) => handleSearchQuery("location", value)}>
-          <SelectTrigger className=" w-full border-neutral-300">
-            <SelectValue placeholder="Select Location" />
-          </SelectTrigger>
-          <SelectContent className=" bg-gray-100 border-neutral-300">
-            {bdDivisions?.map((place, index) => (
-              <div key={index} className="flex items-center space-x-2">
-                <SelectItem key={index} value={place}>
-                  {place}
-                </SelectItem>
-              </div>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+
+
     </div>
   );
 }

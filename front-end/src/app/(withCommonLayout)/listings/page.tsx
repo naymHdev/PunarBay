@@ -2,6 +2,7 @@ import FilterSidebar from "@/components/modules/listings/filterSidebar";
 import SmallDeviceSidebar from "@/components/modules/listings/filterSidebar/smallDevaiceSidebar";
 import PBContainer from "@/components/ui/PBContainer";
 import ProductCard from "@/components/ui/ProductCard";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getAllListings } from "@/services/listings";
 import { TLIsting } from "@/types/listings";
 
@@ -36,17 +37,24 @@ const ListingsPage = async ({
               <FilterSidebar />
             </div>
             <div className="">
-              {availableProduct?.length > 0 ? (
-                availableProduct
-                  .slice()
-                  .reverse()
-                  .map((product: TLIsting) => (
-                    <ProductCard key={product._id} product={product} />
-                  ))
+              {availableProduct ? (
+                availableProduct.length > 0 ? (
+                  availableProduct
+                    .slice()
+                    .reverse()
+                    .map((product: TLIsting) => (
+                      <ProductCard key={product._id} product={product} />
+                    ))
+                ) : (
+                  <p className="font-medium text-center text-[#1575B9] w-full col-span-full">
+                    No Product Available!
+                  </p>
+                )
               ) : (
-                <p className=" font-medium text-center text-[#1575B9]">
-                  No Product Available!
-                </p>
+                // Skeleton Loader
+                Array.from({ length: 8 }).map((_, index) => (
+                  <Skeleton key={index} className="h-60 w-full rounded-lg" />
+                ))
               )}
             </div>
           </div>
