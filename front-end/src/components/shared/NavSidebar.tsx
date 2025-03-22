@@ -4,9 +4,11 @@ import { AlignJustify, CircleUserRound, FolderKanban, UserRound, X, Heart } from
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import PBLoading from "../ui/PBLoading";
 
 const NavSidebar = () => {
     const [categories, setCategories] = useState<TCategory[] | null>([])
+    const [isLoading, setIsLoading] = useState(false);
     const sidebarRef = useRef<HTMLDivElement>(null);
 
     const toggleSidebar = () => {
@@ -17,11 +19,15 @@ const NavSidebar = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true);
             try {
                 const categoryData = await getAllCategories();
                 setCategories(categoryData?.data);
+                setIsLoading(false);
             } catch (error: any) {
                 return Error(error);
+            } finally {
+                setIsLoading(false);
             }
         };
         fetchData();
@@ -85,7 +91,7 @@ const NavSidebar = () => {
                         <h3 className=" font-semibold text-lg uppercase">Categories</h3>
                         <div className=" space-y-4 mt-4">
                             {
-                                categories && categories?.map((category: TCategory, idx: number) => (
+                                isLoading ? <PBLoading /> : categories && categories?.map((category: TCategory, idx: number) => (
                                     <div key={idx} className="flex items-center gap-3 text-sm font-normal hover:text-[#1575B9]">
                                         <div className="w-8 h-8 relative rounded-full overflow-hidden">
                                             <Image

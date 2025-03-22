@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import PBLoading from "@/components/ui/PBLoading";
 
 export const bdDivisions = [
   "Barisal",
@@ -139,7 +140,7 @@ export default function FilterSidebar() {
       {/* Product Category */}
       <div className="mb-6">
         <h2 className="text-lg font-semibold mb-4">Product Category</h2>
-        {!isLoading && (
+        {isLoading ? <PBLoading /> : (
           <RadioGroup className="space-y-2">
             {categories?.map((category: { _id: string; name: string }) => (
               <div key={category._id} className="flex items-center space-x-2">
