@@ -21,7 +21,7 @@ const FeaturedCategories = async () => {
               </PBButton>
             </Link>
           </div>
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-5">
+          <div className="mt-5 grid grid-cols-2 md:flex md:flex-wrap items-center justify-center gap-2">
             {categories?.map((category: TCategory, idx: number) => (
               <CategoryCard key={idx} category={category} />
             ))}

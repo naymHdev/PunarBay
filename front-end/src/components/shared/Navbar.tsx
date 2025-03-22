@@ -88,10 +88,10 @@ const Navbar = () => {
       >
 
         <PBContainer maxWidth="7xl">
-          <div className="py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center justify-center gap-4">
+          <div className="py-2 md:py-4 flex items-center justify-between gap-4">
             {/* Logo */}
             <div className="flex items-center justify-between sm:justify-start">
-              <div className="flex items-center text-4xl font-black">
+              <div className="flex items-center text-xl md:text-2xl lg:text-4xl font-black">
                 <NavSidebar />
                 <Link href="/">
                   <h2><span className=" text-[#1575B9]">Punar</span>Bay</h2>
@@ -102,25 +102,24 @@ const Navbar = () => {
             </div>
 
             {/* Search and Dropdown */}
-            <div className="flex justify-center sm:justify-center gap-4">
-              <div className="flex w-full items-center border border-[#1575B9] rounded">
+            <div className="w-full hidden md:flex justify-center gap-4">
+              <div className="flex w-full items-center border border-[#1575B9] rounded-full overflow-hidden">
                 <Input
-                  onChange={(e) =>
-                    handleSearchQuery("searchTerm", e.target.value)
-                  }
-                  className="px-3 border-none"
+                  onChange={(e) => handleSearchQuery("searchTerm", e.target.value)}
+                  className="px-4 py-2 border-none w-full focus:outline-none"
                   type="search"
                   placeholder="Search in All Bangladesh"
                 />
                 <Link href="/listings">
                   <Button
-                    className="bg-[#1575B9] hover:cursor-pointer border-none rounded-none hover:bg-[#1575B9] text-white"
+                    className=" hover:cursor-pointer border-none rounded-full text-[#1575B9] px-4 py-2 flex items-center justify-center"
                     type="submit"
                   >
-                    <Search />
+                    <Search className="w-8 h-8" />
                   </Button>
                 </Link>
               </div>
+
             </div>
 
             {/* User and Post Ad Buttons */}
@@ -128,7 +127,7 @@ const Navbar = () => {
               {isUser?.isActive && isUser?.email ? (
                 <>
                   <Link href="/user/dashboard">
-                    <div className=" flex items-center gap-1">
+                    <div className="hidden md:flex items-center gap-1">
                       {isUser?.profileImage ? (
                         <>
                           <Avatar>
@@ -162,12 +161,12 @@ const Navbar = () => {
                 </div>
               )}
               <Link href="/user/my-favourits" legacyBehavior>
-                <div className="relative inline-flex items-center justify-center">
+                <div className="hidden relative md:inline-flex items-center justify-center">
                   <Button
                     variant="ghost"
                     className="p-0 m-0 shadow-none border-none hover:cursor-pointer"
                   >
-                    <Heart className="text-[#1575B9] size-8" />
+                    <Heart className="text-[#1575B9] size-7" />
                   </Button>
                   {wishlist && wishlist?.length > 0 && (
                     <span className="absolute -top-1.5 -right-1.5 text-white bg-[#1575B9]  text-xs font-medium h-5 w-5 flex items-center justify-center rounded-full">
@@ -177,7 +176,7 @@ const Navbar = () => {
                 </div>
               </Link>
               <Link href="/user/post-ad">
-                <PBButton>
+                <PBButton className=" text-sm font-normal">
                   Post Free Ad <Plus />
                 </PBButton>
               </Link>

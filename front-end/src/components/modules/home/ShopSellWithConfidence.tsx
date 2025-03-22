@@ -15,7 +15,7 @@ const ShopSellWithConfidence = () => {
             <h2 className=" text-lg font-semibold">
               Shop Sell With Confidence
             </h2>
-            <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-5">
               <div className=" flex items-center gap-4">
                 <Image src={pro} alt="" height={400} width={400} />
                 <div className=" space-y-2">

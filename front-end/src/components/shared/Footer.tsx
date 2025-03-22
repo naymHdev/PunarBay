@@ -30,7 +30,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white pt-14 pb-5">
       <PBContainer maxWidth="7xl">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           <div>
             <Link href="/">
               <div className="flex items-center text-5xl">

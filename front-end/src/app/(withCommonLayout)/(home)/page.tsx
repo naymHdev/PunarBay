@@ -4,6 +4,7 @@ import HighlightCategory from "@/components/modules/home/HighlightCategory";
 import HowItWorksSection from "@/components/modules/home/HowItWorks";
 import MostPopularProducts from "@/components/modules/home/MostPopularProducts";
 import ShopSellWithConfidence from "@/components/modules/home/ShopSellWithConfidence";
+import TestimonialSection from "@/components/modules/home/Testimonial";
 import { getAllListings } from "@/services/listings";
 import { TLIsting } from "@/types/listings";
 
@@ -22,6 +23,7 @@ const HomePage = async () => {
         <HighlightCategory />
         <MostPopularProducts data={availableProduct} />
         <HowItWorksSection />
+        <TestimonialSection />
         <ShopSellWithConfidence />
       </div>
     </>

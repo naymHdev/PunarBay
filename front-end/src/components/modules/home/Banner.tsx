@@ -36,7 +36,7 @@ const BannerSection = () => {
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
-              <div className="relative w-full h-[25vh] md:h-[40vh] lg:h-[65vh]">
+              <div className="relative w-full h-[24vh] md:h-[32vh] lg:h-[63vh]">
                 <Image
                   src={slide}
                   alt={`Slide ${index + 1}`}
