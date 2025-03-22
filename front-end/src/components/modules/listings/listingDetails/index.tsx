@@ -60,7 +60,7 @@ const ListingDetails = ({ product }: { product: TLIsting }) => {
         </div>
 
         <div className="bg-white col-span-1 md:col-span-2  p-4 rounded-lg">
-          <UserBox user={product?.userID} />
+          <UserBox user={product?.userID} timeAgo={timeAgo} />
         </div>
       </div>
 

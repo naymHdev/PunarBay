@@ -17,15 +17,16 @@ import Link from "next/link";
 import authImage from "../../../assets/auth.svg";
 import Image from "next/image";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { loginValidationSchema } from "./loginValidation";
 import { loginUser } from "@/services/auth";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const LoginForm = () => {
   const form = useForm({
-    resolver: zodResolver(loginValidationSchema),
+    defaultValues: {
+      email: 'labire8215@gamebcs.com',
+      password: "labire8215"
+    }
   });
 
   const searchParams = useSearchParams();

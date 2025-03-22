@@ -48,7 +48,7 @@ const UpdateAddressForm = () => {
       profileImage: "",
       address: {
         street: "Housing Socity, Road-11",
-        city: "",
+        city: "Dhaka",
         state: "NY",
         postalCode: "1207",
         country: "Bangladesh",

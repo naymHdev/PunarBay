@@ -1,14 +1,37 @@
+"use client"
+
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, CheckCircle, Mail } from "lucide-react";
+import { MapPin, CheckCircle, Mail, UserRound } from "lucide-react";
 import { TUser } from "@/types/listings";
-// import { useUser } from "@/contexts/UserContext";
+import { useState, useEffect } from "react";
+import { IUser } from "@/types/user";
+import { getMyProfile } from "@/services/users";
 
-const UserBox = ({ user }: { user: TUser }) => {
+type TUserProps = {
+  user: TUser,
+  timeAgo: string
+}
 
-  // const {user: isUser} = useUser()
-  // console.log('user__', user);
+const UserBox = ({ user, timeAgo }: TUserProps) => {
+
+  const [isUser, setIsUser] = useState<IUser | null>(null);
+
+  useEffect(() => {
+    if (!user?._id) return;
+
+    const fetchData = async () => {
+      try {
+        const userData = await getMyProfile(user?._id);
+        setIsUser(userData.data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
+    fetchData();
+  }, [user?._id]);
   // console.log('isUser__', isUser);
 
   return (
@@ -16,18 +39,22 @@ const UserBox = ({ user }: { user: TUser }) => {
       {/* Avatar */}
       <div className="flex justify-center">
         <Avatar className="w-16 h-16">
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>U</AvatarFallback>
+          <AvatarImage src={isUser?.profileImage} />
+          <AvatarFallback>
+            <UserRound size={32} />
+          </AvatarFallback>
         </Avatar>
       </div>
 
       {/* User Info */}
       <div className="text-center mt-2">
-        <h3 className="text-lg font-semibold">{user.name}</h3>
+        <h3 className="text-lg font-semibold">{isUser?.name}</h3>
         <p className="text-sm text-gray-500 flex items-center justify-center gap-1">
-          <MapPin className="text-[#1575B9] w-4 h-4" /> Hemel Hempstead
+          <MapPin className="text-[#1575B9] w-4 h-4" /> {isUser?.address
+            ? `${isUser.address.city}, ${isUser.address.country}`
+            : "Unverified User"}
         </p>
-        <p className="text-xs text-gray-500">Posting for 2+ years</p>
+        <p className="text-xs text-gray-500">Posting for {timeAgo}</p>
       </div>
 
       {/* Online Badge */}
