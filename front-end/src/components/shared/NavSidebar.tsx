@@ -26,8 +26,7 @@ const NavSidebar = () => {
         };
         fetchData();
     }, []);
-
-    console.log('categories', categories);
+    // console.log('categories', categories);
 
     return (
         <>
@@ -43,22 +42,21 @@ const NavSidebar = () => {
             {/* Sidebar */}
             <div
                 ref={sidebarRef}
-                className="bg-white fixed top-0 left-0  w-64 transform -translate-x-full transition-transform duration-300 z-50 shadow text-gray-700"
+                className="bg-white fixed top-0 left-0  w-72 transform -translate-x-full transition-transform duration-300 z-50 shadow text-gray-700"
             >
-                <div className="flex justify-between border-b border-neutral-300 shadow px-4 py-2">
+                <div className="flex justify-between shadow-sm px-4 py-3">
                     <button
                         className="text-right"
-                        onClick={toggleSidebar}
                     >
                         <p className=" text-xl"><span className="text-[#1575B9]">Punar</span>Bay</p>
                     </button>
-                    <X />
+                    <X onClick={toggleSidebar} />
                 </div>
                 <div className="h-screen overflow-auto scroll-smooth">
-                    <div className="p-3 border-b border-neutral-300">
+                    <div className="p-3 border-b border-neutral-300 text-sm font-medium">
                         <div className="flex items-center gap-2">
                             <CircleUserRound />
-                            <Link href="/login" className="text-sm">
+                            <Link href="/login">
                                 Login/Register
                             </Link>
                         </div>
@@ -88,16 +86,17 @@ const NavSidebar = () => {
                         <div className=" space-y-4 mt-4">
                             {
                                 categories && categories?.map((category: TCategory, idx: number) => (
-                                    <div key={idx} className="flex items-center gap-2 text-sm font-normal hover:text-[#1575B9]">
+                                    <div key={idx} className="flex items-center gap-3 text-sm font-normal hover:text-[#1575B9]">
                                         <div className="w-8 h-8 relative rounded-full overflow-hidden">
                                             <Image
                                                 src={category.icon}
                                                 alt={category.name}
                                                 fill
+                                                sizes="32px"
                                                 className="object-contain"
                                             />
                                         </div>
-                                        <Link href={`/listings/${category._id}`}>
+                                        <Link href={`/ads/${category._id}`}>
                                             {category.name}
                                         </Link>
                                     </div>

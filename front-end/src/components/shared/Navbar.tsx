@@ -69,16 +69,16 @@ const Navbar = () => {
           <div className="py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center justify-center gap-4">
             {/* Logo */}
             <div className="flex items-center justify-between sm:justify-start">
-              <Link href="/">
-                <div className="flex items-center text-4xl font-black">
-                  <NavSidebar />
-                  <h2 className=" text-[#1575B9]">Punar</h2>Bay
-                </div>
-              </Link>
-              <div>
-                <Link className=" ml-8 text-md font-medium" href="/listings">
-                  Products
+              <div className="flex items-center text-4xl font-black">
+                <NavSidebar />
+                <Link href="/">
+                  <h2><span className=" text-[#1575B9]">Punar</span>Bay</h2>
                 </Link>
+              </div>
+              <div>
+                {/* <Link className=" ml-8 text-md font-medium" href="/listings">
+                  Products
+                </Link> */}
               </div>
             </div>
 
