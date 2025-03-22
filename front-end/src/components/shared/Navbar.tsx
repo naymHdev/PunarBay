@@ -19,6 +19,8 @@ import NavSidebar from "./NavSidebar";
 const Navbar = () => {
   const [isUser, setIsUser] = useState<IUser | null>(null);
   const [wishlist, setWishlist] = useState<TLIsting[] | null>(null);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const { user } = useUser();
   // console.log("isUser", isUser);
 
@@ -61,10 +63,30 @@ const Navbar = () => {
     fetchData();
   }, []);
 
+  // Cretate navbar scrolling effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < lastScrollY) {
+        // Scrolling down → Show Navbar
+        setIsVisible(true);
+      } else {
+        // Scrolling up → Hide Navbar
+        setIsVisible(false);
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   return (
     <>
-      <div className="shadow-sm bg-white">
+      <div
+        className={`shadow-sm bg-white self-start sticky z-50 transition-transform duration-300 top-0 left-0 w-full ${isVisible ? "translate-y-0" : "-translate-y-full"
+          }`}
+      >
+
         <PBContainer maxWidth="7xl">
           <div className="py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center justify-center gap-4">
             {/* Logo */}
@@ -76,9 +98,6 @@ const Navbar = () => {
                 </Link>
               </div>
               <div>
-                {/* <Link className=" ml-8 text-md font-medium" href="/listings">
-                  Products
-                </Link> */}
               </div>
             </div>
 
