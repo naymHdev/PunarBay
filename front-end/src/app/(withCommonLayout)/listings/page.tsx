@@ -1,5 +1,6 @@
 import FilterSidebar from "@/components/modules/listings/filterSidebar";
 import SmallDeviceSidebar from "@/components/modules/listings/filterSidebar/smallDevaiceSidebar";
+import PBPagination from "@/components/ui/core/PBPaginations";
 import PBContainer from "@/components/ui/PBContainer";
 import ProductCard from "@/components/ui/ProductCard";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -7,16 +8,18 @@ import { getAllListings } from "@/services/listings";
 import { TLIsting } from "@/types/listings";
 
 type TSearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
-
-const ListingsPage = async ({
-  searchParams,
-}: {
+type TListingProps = {
   searchParams: TSearchParams;
-}) => {
-  const query = await searchParams;
+};
 
-  const { data: allListings } = await getAllListings(
-    undefined,
+const ListingsPage = async ({ searchParams }: TListingProps) => {
+  const params = await searchParams;
+
+  const page = String(params.page);
+  const query = params.query;
+
+  const { data: allListings, meta } = await getAllListings(
+    page,
     undefined,
     query
   );
@@ -24,6 +27,8 @@ const ListingsPage = async ({
   const availableProduct = allListings?.filter(
     (itm: TLIsting) => itm.status === "available" && itm.userID !== null
   );
+
+  console.log("meta", meta);
 
   return (
     <>
@@ -53,9 +58,17 @@ const ListingsPage = async ({
               ) : (
                 // Skeleton Loader
                 Array.from({ length: 8 }).map((_, index) => (
-                  <Skeleton key={index} className="h-60 w-full rounded-lg bg-gray-300" />
+                  <Skeleton
+                    key={index}
+                    className="h-60 w-full rounded-lg bg-gray-300"
+                  />
                 ))
               )}
+
+              {/* Pagination */}
+              <div className=" flex items-center justify-end pb-5">
+                <PBPagination totalPage={meta.totalPage} />
+              </div>
             </div>
           </div>
         </PBContainer>

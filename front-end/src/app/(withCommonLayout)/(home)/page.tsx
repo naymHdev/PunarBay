@@ -29,8 +29,8 @@ const HomePage = async () => {
         <HighlightCategory />
         <MostPopularProducts data={availableProduct} />
         <HowItWorksSection />
-        <SportsCategoryProducts sports={allSportsProducts} />
         <TestimonialSection />
+        <SportsCategoryProducts sports={allSportsProducts} />
         <ShopSellWithConfidence />
       </div>
     </>
