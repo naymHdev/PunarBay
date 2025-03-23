@@ -10,13 +10,14 @@ import { TLIsting } from "@/types/listings";
 type TSearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 type TListingProps = {
   searchParams: TSearchParams;
+  params: Promise<{ id: string }>;
 };
 
 const ListingsPage = async ({ searchParams }: TListingProps) => {
   const params = await searchParams;
 
   const page = String(params.page);
-  const query = params.query;
+  const query = await searchParams;
 
   const { data: allListings, meta } = await getAllListings(
     page,
