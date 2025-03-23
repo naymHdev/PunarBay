@@ -7,6 +7,8 @@ import {
   UserRound,
   X,
   Heart,
+  ReceiptText,
+  SquarePercent,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -83,6 +85,14 @@ const NavSidebar = () => {
             <div className="flex items-center gap-2">
               <FolderKanban />
               <Link href="/user/dashboard">My Listings</Link>
+            </div>
+            <div className="flex items-center gap-2">
+              <SquarePercent />
+              <Link href="/offers">Offers</Link>
+            </div>
+            <div className="flex items-center gap-2">
+              <ReceiptText />
+              <Link href="/about">About Us</Link>
             </div>
           </div>
           <section className="p-4">

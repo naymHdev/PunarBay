@@ -83,21 +83,40 @@ const Navbar = () => {
   return (
     <>
       <div
-        className={`shadow-sm bg-white self-start sticky z-50 transition-transform duration-300 top-0 left-0 w-full ${isVisible ? "translate-y-0" : "-translate-y-full"
-          }`}
+        className={`shadow-sm bg-white self-start sticky z-50 transition-transform duration-300 top-0 left-0 w-full ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        }`}
       >
-
         <PBContainer maxWidth="7xl">
           <div className="py-2 md:py-4 flex items-center justify-between gap-4">
             {/* Logo */}
-            <div className="flex items-center justify-between sm:justify-start">
+            <div className="flex items-center gap-5 justify-between sm:justify-start">
               <div className="flex items-center text-xl md:text-2xl lg:text-4xl font-black">
                 <NavSidebar />
                 <Link href="/">
-                  <h2><span className=" text-[#1575B9]">Punar</span>Bay</h2>
+                  <h2>
+                    <span className=" text-[#1575B9]">Punar</span>Bay
+                  </h2>
                 </Link>
               </div>
-              <div>
+              <div className="bg-[#F3F3F3] px-3 py-2 hidden lg:flex items-center gap-6">
+                <nav className="flex space-x-6">
+                  {[
+                    { href: "/offers", label: "Offers" },
+                    { href: "/about", label: "About" },
+                    { href: "/contact", label: "Contact" },
+                  ].map(({ href, label }) => (
+                    <Link key={href} href={href}>
+                      <p
+                        className={`text-lg font-semibold hover:text-[#1575B9] ${
+                          pathname === href ? "text-[#1575B9]" : "text-black"
+                        }`}
+                      >
+                        {label}
+                      </p>
+                    </Link>
+                  ))}
+                </nav>
               </div>
             </div>
 
@@ -105,7 +124,9 @@ const Navbar = () => {
             <div className="w-full hidden md:flex justify-center gap-4">
               <div className="flex w-full items-center border border-[#1575B9] rounded-full overflow-hidden">
                 <Input
-                  onChange={(e) => handleSearchQuery("searchTerm", e.target.value)}
+                  onChange={(e) =>
+                    handleSearchQuery("searchTerm", e.target.value)
+                  }
                   className="px-4 py-2 border-none w-full focus:outline-none"
                   type="search"
                   placeholder="Search in All Bangladesh"
@@ -119,7 +140,6 @@ const Navbar = () => {
                   </Button>
                 </Link>
               </div>
-
             </div>
 
             {/* User and Post Ad Buttons */}

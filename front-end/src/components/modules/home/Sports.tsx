@@ -23,7 +23,7 @@ const SportsCategoryProducts = ({ sports }: { sports: TLIsting }) => {
       <PBContainer maxWidth="7xl" className="mt-4 lg:mt-10">
         <div className=" flex items-center justify-between">
           <h2 className=" text-lg font-semibold">
-            Bestselling in Sports & Fitness
+            Best Selling in Sports & Fitness
           </h2>
           <Link href={`/ads/${sportId}`}>
             <PBButton>
