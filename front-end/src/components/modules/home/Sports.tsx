@@ -68,7 +68,7 @@ const SportsCategoryProducts = ({ sports }: { sports: TLIsting }) => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="absolute bottom-0 right-12 -translate-x-1/2 flex gap-1">
+            <div className="absolute -bottom-4 right-12 -translate-x-1/2 flex gap-1">
               <CarouselPrevious className="border-neutral-400" />
               <CarouselNext className="border-neutral-400" />
             </div>

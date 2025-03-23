@@ -7,7 +7,7 @@ import Image from "next/image";
 const HowItWorksSection = () => {
   return (
     <>
-      <div className="mt-4 md:mt-10">
+      <div className="mt-4 md:mt-10 bg-white py-10 lg:py-16">
         <PBContainer maxWidth="7xl">
           <h2 className="text-lg font-semibold">How It Works</h2>
           <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-5">

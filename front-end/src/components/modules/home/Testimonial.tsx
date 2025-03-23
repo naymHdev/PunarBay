@@ -42,7 +42,7 @@ const TestimonialSection = () => {
             >
               <CarouselContent>
                 {testimonials?.map((testimonial, index) => (
-                  <CarouselItem key={index} className="pl-1 md:basis-1/2">
+                  <CarouselItem key={index} className="pl-1 md:basis-1/3">
                     <div className="p-1">
                       <Card className="w-full max-w-sm p-4 hover:shadow-sm border-none bg-white">
                         <CardContent className="flex flex-col items-start text-start gap-4 mt-5 mb-3">
