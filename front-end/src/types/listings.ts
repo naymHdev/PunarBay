@@ -1,3 +1,5 @@
+import { JSX } from "react";
+
 export type TCategory = {
   _id: string;
   name: string;
@@ -20,6 +22,7 @@ export type TUser = {
 };
 
 export type TLIsting = {
+  map(arg0: (product: TLIsting) => JSX.Element): import("react").ReactNode;
   _id: string;
   title: string;
   description: string;
