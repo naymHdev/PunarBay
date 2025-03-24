@@ -104,16 +104,40 @@ const Footer = () => {
           </div>
           <div className=" flex items-center gap-2">
             <div className=" rounded-md p-2 bg-[#1575B9]">
-              <Facebook />
+              <a
+                href="https://www.facebook.com/naymhdev"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Facebook />
+              </a>
             </div>
             <div className=" rounded-md p-2 bg-[#1575B9]">
-              <Youtube />
+              <a
+                href="https://www.youtube.com/cleancodeai"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Youtube />
+              </a>
             </div>
             <div className=" rounded-md p-2 bg-[#1575B9]">
-              <InstagramIcon />
+              <a
+                href="https://www.instagram.com//naymhdev"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <InstagramIcon />
+              </a>
             </div>
             <div className=" rounded-md p-2 bg-[#1575B9]">
-              <TwitterIcon />
+              <a
+                href="https://www.x.com/naymhdev"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <TwitterIcon />
+              </a>
             </div>
           </div>
         </div>
