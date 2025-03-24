@@ -102,6 +102,7 @@ const Navbar = () => {
               <div className="bg-[#F3F3F3] px-3 py-2 hidden lg:flex items-center gap-6">
                 <nav className="flex space-x-6">
                   {[
+                    { href: "/listings", label: "Ads" },
                     { href: "/offers", label: "Offers" },
                     { href: "/about", label: "About" },
                     { href: "/contact", label: "Contact" },

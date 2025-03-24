@@ -51,7 +51,7 @@ export default function OfferCards() {
             {offer.items.map((item, index) => (
               <div
                 key={index}
-                className="border rounded-lg p-4 shadow-md bg-white flex items-center gap-4"
+                className="border border-neutral-400 rounded-lg p-4 shadow-sm bg-white flex items-center gap-4"
               >
                 <div className="w-24 h-24 flex-shrink-0">
                   <Image

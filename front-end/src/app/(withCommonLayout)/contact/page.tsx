@@ -18,12 +18,12 @@ const ContactUsPage = () => {
         </PBContainer>
       </div>
       <PBContainer maxWidth="7xl">
-        <div className=" grid grid-cols-1 md:grid-cols-2">
+        <div className=" grid grid-cols-1 md:grid-cols-2 relative">
           <div className="ml-10 md:ml-24 mt-5 md:mt-10">
             {/* Left Section */}
             <div className="space-y-4">
               <PBButton>How Can We Help?</PBButton>
-              <p className="text-4xl font-bold text-gray-800">
+              <p className="text-4xl font-bold text-gray-700">
                 We Are Ready to Help
               </p>
               <p className="text-gray-600">
