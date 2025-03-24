@@ -1,4 +1,5 @@
 import ContactUsForm from "@/components/modules/contact";
+import ContactSection from "@/components/modules/contact/ContactSection";
 import PBButton from "@/components/ui/PBButton";
 import PBContainer from "@/components/ui/PBContainer";
 import { Facebook, Instagram, Youtube } from "lucide-react";
@@ -49,6 +50,9 @@ const ContactUsPage = () => {
           </div>
         </div>
       </PBContainer>
+      <div className=" mt-8 lg:mt-16">
+        <ContactSection />
+      </div>
     </>
   );
 };
