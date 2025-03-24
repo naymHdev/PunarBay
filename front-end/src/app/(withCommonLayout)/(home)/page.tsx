@@ -24,7 +24,7 @@ const HomePage = async () => {
   return (
     <>
       <div className="">
-        {/* <BannerSection /> */}
+        <BannerSection />
         <FeaturedCategories />
         <HighlightCategory />
         <MostPopularProducts data={availableProduct} />

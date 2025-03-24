@@ -1,6 +1,5 @@
 "use client";
 
-import PBContainer from "@/components/ui/PBContainer";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -18,13 +17,13 @@ const slides = [slide1, slide2, slide3, slide4, slide5];
 
 const BannerSection = () => {
   return (
-    <PBContainer>
+    <>
       <div className="">
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
-            delay: 2500,
+            delay: 5000,
             disableOnInteraction: false,
           }}
           pagination={{
@@ -41,7 +40,7 @@ const BannerSection = () => {
                   src={slide}
                   alt={`Slide ${index + 1}`}
                   fill
-                  className="w-full object-contain"
+                  className="w-full object-cover object-center"
                   priority
                 />
               </div>
@@ -49,7 +48,7 @@ const BannerSection = () => {
           ))}
         </Swiper>
       </div>
-    </PBContainer>
+    </>
   );
 };
 
