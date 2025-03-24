@@ -13,16 +13,19 @@ type TCategoryProps = {
   params: Promise<{ id: string }>;
 };
 
-const CategoryBaseAdsPage = async ({ searchParams }: TCategoryProps) => {
-  const params = await searchParams;
+const CategoryBaseAdsPage = async ({
+  searchParams,
+  params,
+}: TCategoryProps) => {
+  // const params = await searchParams;
   const query = await searchParams;
-  const page = String(params.page);
+  // const page = String(params.page);
 
   const { id } = await params;
 
   // Fetch all listings
   const { data: allListings, meta } = await getAllListings(
-    page,
+    query?.page as string,
     undefined,
     query
   );
