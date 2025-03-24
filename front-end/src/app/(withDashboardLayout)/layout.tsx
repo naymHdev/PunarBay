@@ -1,5 +1,4 @@
 import { AppSidebar } from "@/components/modules/dashboard/sidebar/app-sidebar";
-import PBContainer from "@/components/ui/PBContainer";
 import {
   SidebarInset,
   SidebarProvider,
@@ -8,7 +7,7 @@ import {
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <PBContainer maxWidth="7xl">
+    <>
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
@@ -20,7 +19,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           <div className="pt-0 min-h-screen">{children}</div>
         </SidebarInset>
       </SidebarProvider>
-    </PBContainer>
+    </>
   );
 };
 

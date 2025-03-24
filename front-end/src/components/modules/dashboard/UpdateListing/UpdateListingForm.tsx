@@ -99,7 +99,7 @@ const UpdateListingForm = ({ product }: { product: TLIsting }) => {
       </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="mt-5 border-2 border-gray-300 rounded-xl flex-grow max-w-2xl p-5">
+          <div className="mt-5 border-2 mb-6 bg-white border-gray-200 rounded-xl flex-grow p-8">
             <div className="grid grid-cols-1 gap-4">
               <FormField
                 control={form.control}
@@ -115,77 +115,87 @@ const UpdateListingForm = ({ product }: { product: TLIsting }) => {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="categories"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Category</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select Product Category" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className=" bg-slate-100">
-                        {categories.map((category) => (
-                          <SelectItem key={category?._id} value={category?._id}>
-                            {category?.name}
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 w-full">
+                <FormField
+                  control={form.control}
+                  name="categories"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Select your category</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select Product Category" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className=" bg-slate-100 w-full">
+                          <SelectItem value="Select your category" disabled>
+                            Select your product category
                           </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                          {categories.map((category) => (
+                            <SelectItem
+                              key={category?._id}
+                              value={category?._id}
+                            >
+                              {category?.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormField
-                control={form.control}
-                name="condition"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Condition</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
+                <FormField
+                  control={form.control}
+                  name="condition"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Select your product condition</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select Product condition" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className=" bg-slate-100">
+                          <SelectItem value="new">New</SelectItem>
+                          <SelectItem value="used">Used</SelectItem>
+                          <SelectItem value="refurbished">
+                            Refurbished
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="price"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Price</FormLabel>
                       <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select Product condition" />
-                        </SelectTrigger>
+                        <Input {...field} value={field.value || ""} />
                       </FormControl>
-                      <SelectContent className=" bg-slate-100">
-                        <SelectItem value="new">New</SelectItem>
-                        <SelectItem value="used">Used</SelectItem>
-                        <SelectItem value="refurbished">Refurbished</SelectItem>
-                      </SelectContent>
-                    </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="price"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Price</FormLabel>
-                    <FormControl>
-                      <Input {...field} value={field.value || ""} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <div className="my-5">
+              <div className="my-4">
                 <FormField
                   control={form.control}
                   name="description"

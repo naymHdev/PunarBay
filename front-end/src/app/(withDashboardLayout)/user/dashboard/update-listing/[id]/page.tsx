@@ -13,7 +13,7 @@ const UpdateListingPage = async ({
 
   return (
     <>
-      <div>
+      <div className="px-6">
         <PBContainer maxWidth="7xl">
           <div>
             <h2 className=" text-3xl font-semibold">Update Your Ads Now</h2>

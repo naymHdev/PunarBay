@@ -61,7 +61,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
 
   return (
     <>
-      <div className=" mb-6 border-neutral-400">
+      <div className=" mb-6 border-neutral-400 px-6">
         <div className="flex items-center justify-between">
           <h2 className=" text-2xl font-bold">My Ads</h2>
           <Link href="/user/post-ad">
@@ -75,7 +75,7 @@ const ManageListings = ({ allListings }: TListingsProps) => {
           </Link>
         </div>
       </div>
-      <div className="space-y-8">
+      <div className="space-y-8 px-6">
         {isMyAds &&
           isMyAds?.map(
             ({
