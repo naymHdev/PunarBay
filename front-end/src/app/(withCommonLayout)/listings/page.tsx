@@ -34,7 +34,7 @@ const ListingsPage = async ({ searchParams }: TListingProps) => {
   return (
     <>
       <div className=" mt-10">
-        <PBContainer>
+        <PBContainer maxWidth="7xl">
           <div className="w-full block md:hidden">
             <SmallDeviceSidebar />
           </div>
@@ -67,8 +67,8 @@ const ListingsPage = async ({ searchParams }: TListingProps) => {
               )}
 
               {/* Pagination */}
-              <div className=" flex items-center justify-end pb-5">
-                <PBPagination totalPage={meta.totalPage} />
+              <div className="flex items-center justify-end pb-5">
+                <PBPagination totalPage={meta?.totalPage} />
               </div>
             </div>
           </div>

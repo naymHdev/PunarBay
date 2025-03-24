@@ -16,7 +16,6 @@ const ListingDetails = ({ product }: { product: TLIsting }) => {
   return (
     <>
       <div className="mt-10 grid grid-cols-1 md:grid-cols-7 gap-7">
-        <div className=" hidden md:block md:col-span-1 rounded-lg p-8"></div>
         <div className="bg-white col-span-1 md:col-span-4 rounded-lg p-8">
           <PBCarosole images={product?.images} />
           <div className=" mt-10">
@@ -59,18 +58,19 @@ const ListingDetails = ({ product }: { product: TLIsting }) => {
           </div>
         </div>
 
-        <div className="bg-white col-span-1 md:col-span-2  p-4 rounded-lg">
+        <div className="col-span-1 md:col-span-2 rounded-lg">
           <UserBox user={product?.userID} timeAgo={timeAgo} />
         </div>
+        <div className=" hidden md:block md:col-span-1 rounded-lg p-8"></div>
       </div>
 
       {/* Similar Product section */}
-      <section className="mt-5 grid grid-cols-1 md:grid-cols-7 gap-7">
-        <div className=" hidden md:block md:col-span-1 rounded-lg p-8"></div>
+      <section className="my-5 grid grid-cols-1 md:grid-cols-7 gap-7">
         <div className="bg-white col-span-1 md:col-span-4 rounded-lg p-8">
           <SimilarAds category={product?.categories.name} />
         </div>
         <div className="col-span-1 md:col-span-2  p-4 rounded-lg"></div>
+        <div className=" hidden md:block md:col-span-1 rounded-lg p-8"></div>
       </section>
     </>
   );

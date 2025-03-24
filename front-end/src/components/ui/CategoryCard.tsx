@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Skeleton } from "./skeleton";
 
 const CategoryCard = ({ category }: { category: TCategory }) => {
-
   return (
     <Link href={`/ads/${category._id}`}>
       <div className="bg-white group rounded-2xl hover:cursor-pointer md:w-52 md:h-52 flex flex-col items-center justify-evenly p-4 border border-neutral-200">

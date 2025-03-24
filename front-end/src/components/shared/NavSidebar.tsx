@@ -48,7 +48,7 @@ const NavSidebar = ({ isUser }: { isUser: IUser | null }) => {
   return (
     <>
       {/* Sidebar Toggle Button */}
-      <div className="p-2">
+      <div className="pr-2">
         <AlignJustify
           className="hover:cursor-pointer md:size-9"
           onClick={toggleSidebar}

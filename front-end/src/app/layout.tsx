@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${outfit.variable} ${nunitoSans.variable} antialiased border border-[#1575B9]`}
+        className={`${outfit.variable} ${nunitoSans.variable} antialiased]`}
       >
         <Providers>{children}</Providers>
         <Toaster position="top-right" />

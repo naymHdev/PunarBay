@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -10,12 +10,11 @@ import { IUser } from "@/types/user";
 import { getMyProfile } from "@/services/users";
 
 type TUserProps = {
-  user: TUser,
-  timeAgo: string
-}
+  user: TUser;
+  timeAgo: string;
+};
 
 const UserBox = ({ user, timeAgo }: TUserProps) => {
-
   const [isUser, setIsUser] = useState<IUser | null>(null);
 
   useEffect(() => {
@@ -35,7 +34,7 @@ const UserBox = ({ user, timeAgo }: TUserProps) => {
   // console.log('isUser__', isUser);
 
   return (
-    <div className="w-full rounded-lg bg-blue-100/70 p-4">
+    <div className="w-full rounded-lg bg-white p-4">
       {/* Avatar */}
       <div className="flex justify-center">
         <Avatar className="w-16 h-16">
@@ -50,7 +49,8 @@ const UserBox = ({ user, timeAgo }: TUserProps) => {
       <div className="text-center mt-2">
         <h3 className="text-lg font-semibold">{isUser?.name}</h3>
         <p className="text-sm text-gray-500 flex items-center justify-center gap-1">
-          <MapPin className="text-[#1575B9] w-4 h-4" /> {isUser?.address
+          <MapPin className="text-[#1575B9] w-4 h-4" />{" "}
+          {isUser?.address
             ? `${isUser.address.city}, ${isUser.address.country}`
             : "Unverified User"}
         </p>

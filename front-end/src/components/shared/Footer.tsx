@@ -95,8 +95,8 @@ const Footer = () => {
       </PBContainer>
       <div className=" border-b border-neutral-600 w-full my-10" />
 
-      <PBContainer>
-        <div className=" flex items-center justify-between">
+      <PBContainer maxWidth="7xl">
+        <div className="flex items-center justify-between">
           <div>
             <p className=" text-gray-300 md:font-medium text-sm md:text-lg">
               &copy; {currentYear} PunarBay. All rights reserved.
