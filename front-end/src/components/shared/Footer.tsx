@@ -51,22 +51,22 @@ const Footer = () => {
           <div>
             <h3 className="text-2xl font-bold mb-4">About Us</h3>
             <ul className=" flex flex-col space-y-2">
-              <Link href="#">About PunarBay</Link>
+              <Link href="/about">About PunarBay</Link>
               <Link href="/listings">Shop</Link>
               <Link href="#">Our Blog</Link>
-              <Link href="#">Become A Seller</Link>
+              <Link href="/user/post-ad">Become A Seller</Link>
             </ul>
           </div>
 
           <div>
             <h3 className="text-2xl font-bold mb-4">Informations</h3>
-            <ul className="space-y-2">
-              <li>Help Center & FAQ</li>
-              <li>Contact</li>
-              <li>Terms & Conditions</li>
-              <li>Legal Policy</li>
-              <li>Privacy Policy</li>
-              <li>Refund & Return Policy</li>
+            <ul className="flex flex-col space-y-2">
+              <Link href={"/about"}>Help Center & FAQ</Link>
+              <Link href="/contact">Contact</Link>
+              <Link href="/about">Terms & Conditions</Link>
+              <Link href="/about">Legal Policy</Link>
+              <Link href="/about">Privacy Policy</Link>
+              <Link href="/about">Refund & Return Policy</Link>
             </ul>
             <div className="flex flex-wrap items-center gap-2 mt-4">
               {paymentMethods?.map((img, index) => (
@@ -84,11 +84,11 @@ const Footer = () => {
 
           <div>
             <h3 className="text-2xl font-bold mb-4">My Account</h3>
-            <ul className="space-y-2">
-              <li>My Account</li>
-              <li>Track Your Order</li>
-              <li>Raise A Claim</li>
-              <li>Track Your Claim</li>
+            <ul className="flex flex-col space-y-2">
+              <Link href="/user/my-account">My Account</Link>
+              <Link href="/user/dashboard">Track Your Order</Link>
+              <Link href="#">Raise A Claim</Link>
+              <Link href="#">Track Your Claim</Link>
             </ul>
           </div>
         </div>
