@@ -29,12 +29,12 @@ const ContactSection = () => {
               key={index}
               className="flex flex-col items-center text-center bg-white px-6 py-10 rounded-lg"
             >
-              <div className="bg-blue-100 h-24 w-24 absolute top-0 rounded-full flex items-center justify-center">
+              <div className="bg-blue-100 h-20 w-20 absolute top-0 rounded-full flex items-center justify-center">
                 <Image
                   src={contact.icon}
                   alt={contact.title}
-                  height={60}
-                  width={60}
+                  height={50}
+                  width={50}
                 />
               </div>
               <h3 className="text-lg font-bold mt-4 text-gray-700">
