@@ -22,7 +22,7 @@ export default function PBContainer({
   className
 }: ContainerProps) {
   return (
-    <div className={`mx-auto px-4 ${className} md:px-6 lg:px-8 w-11/12 max-w-${maxWidth}`}>
+    <div className={`mx-auto px-4 ${className} md:px-4 lg:px-6 w-full max-w-${maxWidth}`}>
       {children}
     </div>
   );

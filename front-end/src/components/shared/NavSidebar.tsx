@@ -14,8 +14,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import PBLoading from "../ui/PBLoading";
+import { IUser } from "@/types/user";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
-const NavSidebar = () => {
+const NavSidebar = ({ isUser }: { isUser: IUser | null }) => {
   const [categories, setCategories] = useState<TCategory[] | null>([]);
   const [isLoading, setIsLoading] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -69,8 +71,42 @@ const NavSidebar = () => {
         <div className="h-screen overflow-auto scroll-smooth">
           <div className="p-3 border-b border-neutral-300 text-sm font-medium">
             <div className="flex items-center gap-2">
-              <CircleUserRound />
-              <Link href="/login">Login/Register</Link>
+              {isUser?.isActive && isUser?.email ? (
+                <>
+                  <Link href="/user/dashboard">
+                    <div className="hidden md:flex items-center gap-1">
+                      {isUser?.profileImage ? (
+                        <>
+                          <Avatar>
+                            <AvatarImage
+                              src={isUser?.profileImage}
+                              alt="@shadcn"
+                            />
+                            <AvatarFallback>
+                              <CircleUserRound />
+                            </AvatarFallback>
+                          </Avatar>
+                        </>
+                      ) : (
+                        <CircleUserRound />
+                      )}
+
+                      <p className="text-sm font-medium text-foreground">
+                        {isUser?.name?.length > 10
+                          ? `${isUser?.name?.slice(0, 10)}...`
+                          : isUser?.name}
+                      </p>
+                    </div>
+                  </Link>
+                </>
+              ) : (
+                <div className="hidden md:flex items-center gap-2">
+                  <CircleUserRound />
+                  <Link href="/login" className="text-sm">
+                    Login/Register
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
           <div className="p-4 border-b border-neutral-300 space-y-4 font-medium text-sm">

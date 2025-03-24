@@ -10,7 +10,7 @@ import PBButton from "@/components/ui/PBButton";
 const ContactUsForm = () => {
   return (
     <>
-      <div className=" bg-[#F2F4F8] shadow p-8 rounded-lg absolute -top-32 lg:min-w-xl">
+      <div className=" bg-[#F2F4F8] shadow p-8 rounded-lg mt-6 md:-mt-26 lg:min-w-xl">
         <form className="space-y-6">
           {/* Name Field */}
           <div className=" text-lg font-bold text-center text-gray-700">

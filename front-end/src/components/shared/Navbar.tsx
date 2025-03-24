@@ -92,7 +92,7 @@ const Navbar = () => {
             {/* Logo */}
             <div className="flex items-center gap-5 justify-between sm:justify-start">
               <div className="flex items-center text-xl md:text-2xl lg:text-4xl font-black">
-                <NavSidebar />
+                <NavSidebar isUser={isUser} />
                 <Link href="/">
                   <h2>
                     <span className=" text-[#1575B9]">Punar</span>Bay
@@ -174,7 +174,7 @@ const Navbar = () => {
                   </Link>
                 </>
               ) : (
-                <div className="flex items-center gap-2">
+                <div className="hidden md:flex items-center gap-2">
                   <CircleUserRound />
                   <Link href="/login" className="text-sm">
                     Login/Register

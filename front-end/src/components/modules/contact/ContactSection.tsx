@@ -21,8 +21,8 @@ const ContactSection = () => {
   ];
 
   return (
-    <section className="py-12 mt-56 relative">
-      <div className="max-w-4xl mx-auto px-6">
+    <section className="py-12 mt-10 lg:mt-40 relative">
+      <div className="w-full max-w-4xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {contacts.map((contact, index) => (
             <div
